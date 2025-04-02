@@ -9,8 +9,8 @@ function Navbar() {
         <div className="space-x-4">
           <Link to="/" className="hover:text-gray-300">Inicio</Link>  |
           |  <Link to="/pokemons" className="hover:text-gray-300">Pokemons</Link>  |
-          |  <Link to="/colecciones" className="hover:text-gray-300">Colecciones</Link>  |
-          |  <Link to="/tienda" className="hover:text-gray-300">Tienda</Link>
+          |  <Link to="/colecciones" className="hover:text-gray-300">Colection</Link>  |
+          |  <Link to="/tienda" className="hover:text-gray-300">Shop</Link>
         </div>
       </div>
     </nav>
@@ -22,10 +22,10 @@ function Home() {
     <div className="App">
       <Navbar />
       <header className="text-center">
-        <h1>Ingresa a tu cuenta o Únete al Team Rocket</h1>
+        <h1>Log in or Sign up to Team Rocket</h1>
         <nav className="mt-4">
           <Link to="/login" className="mx-2 text-blue-500">Login</Link>
-          <Link to="/register" className="mx-2 text-blue-500">Registrarse</Link>
+          <Link to="/register" className="mx-2 text-blue-500">Register</Link>
         </nav>
       </header>
     </div>

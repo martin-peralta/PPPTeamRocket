@@ -6,23 +6,24 @@ import Register from './pages/Register'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 
+import React from 'react';
+import Loading from './pages/Loading';
+
 function App() {
   const [users, setUsers] = useState([]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login users={users} />} />
           <Route path="/register" element={<Register setUsers={setUsers} />} />
+          <Route path="/loading" element={<Loading />} /> 
         </Routes>
       </Router>
 
           
-    
-      </header>
+  
     </div>
   );
 }

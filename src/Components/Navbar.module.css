@@ -1,0 +1,63 @@
+
+/* creacion clases navbar */
+
+.navBar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(145, 74, 74);
+
+}
+
+
+.navOpen {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(145, 74, 74);
+    flex-direction: column;
+    align-items: center;
+}
+
+.navLink {
+    display: flex;
+    font-size: 2em;
+    font-weight: 400;
+    color: #f1f1f1;
+    padding-top: 90px;
+}
+
+/* modificar en el futuro*/
+
+.border{
+    animation-name: borderanimation;
+    height: 1px;
+    animation-duration: 1s;
+    background-color: rgb(87, 158, 158);
+}
+
+/* en proceso*/
+
+@keyframes borderanimation {
+    0%{
+        height: 0px;
+    }
+    100%{
+        height: 1px;
+    }
+    
+}
+
+/* Navbar*/
+
+.logo {
+    display: flex;
+    color: #f1f1f1;
+    font-weight: 600;
+}
+
+
+/* @media (min-with : 800px){
+
+} */

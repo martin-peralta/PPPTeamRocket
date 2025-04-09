@@ -1,0 +1,23 @@
+.Footer{
+    display: flex;
+    padding-top: 25px;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(180deg,#5a2727, #3f0f0f);
+
+}
+
+
+.Image{
+    width: 200px;
+    height: 200px;
+    padding-bottom: 50px;
+}
+
+.Footer p{
+    color: #f1f1f1;
+    font-size: 2em;
+    text-align: center;
+    padding-bottom: 70px;
+
+}

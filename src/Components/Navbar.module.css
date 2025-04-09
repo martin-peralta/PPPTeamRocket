@@ -3,9 +3,12 @@
 
 .navBar{
     display: flex;
+    height: 60px;
+    width: 100%;
+    position: absolute;
     justify-content: space-around;
     align-items: center;
-    background-color: rgb(145, 74, 74);
+
 
 }
 

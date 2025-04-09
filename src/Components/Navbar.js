@@ -48,12 +48,17 @@ const Navbar = () => {
             id: 4,
             link: "SignUp",
         },
+        {   
+            id: 5,
+            link: "InProgress",
+        },
     ]
   return (  
     <div className={!navBarOpen === true ? styles.navBar : styles.navOpen}>
         {!navBarOpen && <p className={styles.logo}>Team Rocket Steal</p>}
         {!navBarOpen ? (
-            <IoMdMenu onClick={() => setNavBarOpen(!navBarOpen)} 
+            <IoMdMenu onClick={() => setNavBarOpen(!navBarOpen)}
+            color="#f1f1f1"  
             size = {30} />
         ): (
             <IoMdClose onClick={() => setNavBarOpen(!navBarOpen)} 

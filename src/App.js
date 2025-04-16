@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 import React from 'react';
 import Loading from './pages/Loading';
+import ToastPage from "./pages/ToastPage";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login users={users} />} />
           <Route path="/register" element={<Register setUsers={setUsers} />} />
           <Route path="/loading" element={<Loading />} /> 
+          <Route path="/toast" element={<ToastPage />} />
         </Routes>
       </Router>
 

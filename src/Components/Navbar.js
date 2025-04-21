@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
-import { Link as RouterLink } from 'react-router-dom'; // Alias para diferenciar
+import { Link as RouterLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 import { useScrollPosition } from '../Hooks/scrollsPositions';
@@ -30,12 +30,10 @@ const Navbar = () => {
 
 
     const links = [
-        { id: 1, link: "Home", to: "", type: "route" },
-        { id: 2, link: "Account", type: "scroll" },
-        { id: 3, link: "PokeCards", type: "scroll" },
-        { id: 4, link: "SignUp", type: "scroll" },
+        { id: 1, link: "Home", to: "/", type: "route" },
+        { id: 2, link: "Account", to: "/account", type: "route" }, 
+        { id: 3, link: "Cards",to:'/cards', type: "route" },
         { id: 5, link: "InProgress", type: "scroll" },
-        { id: 6, link: "Perfil", to: "/perfil", type: "route" }, 
     ];
 
     const scrollPosition = useScrollPosition();
@@ -126,7 +124,7 @@ const Navbar = () => {
                         duration={500}
                         className={styles.contactlink}
                     >
-                        Contact
+                        Log in
                     </ScrollLink>
                 </ul>
             )}

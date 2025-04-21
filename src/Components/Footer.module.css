@@ -10,14 +10,23 @@
 
 .Image{
     width: 200px;
-    height: 200px;
-    padding-bottom: 50px;
+    height: 100px;
+    padding-bottom: 0px;
 }
 
 .Footer p{
     color: #f1f1f1;
     font-size: 2em;
     text-align: center;
-    padding-bottom: 70px;
+    padding-bottom: 30px;
 
+}
+
+.BackgroundFooter{
+    background-color: #3a3232;
+    padding: 1rem;
+    border-radius: 25px;
+    width: 93%;
+    margin: 0 auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }

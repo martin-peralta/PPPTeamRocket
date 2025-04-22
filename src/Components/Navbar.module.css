@@ -8,6 +8,7 @@
     position: absolute;
     justify-content: space-around;
     align-items: center;
+    background: linear-gradient(180deg, #4b1717, #ff0000);;
 }
 
 
@@ -16,7 +17,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: rgb(145, 74, 74);
+    background-color: #343434f5;
     flex-direction: column;
     align-items: center;
 }
@@ -92,43 +93,24 @@
     .navLink:hover{
         font-size: 1.5em;
     }
-    .navOnScroll{
-        display: flex;
-        height: 60px;
-        width: 100%;
-        position: absolute;
-        justify-content: space-around;
-        align-items: center;
-        background-color: antiquewhite;
-    
-    }
 } 
 
 
 
 
-.navOnScroll{
-    display: flex;
-    height: 60px;
-    width: 100%;
-    position: absolute;
-    justify-content: space-around;
-    align-items: center;
-    background-color: antiquewhite;
 
-}
 
 /*
  Borde para el navbar en contacto
  para usar despues en el Sign Up u otra opción
 */
 
-.contactlink{
+.Loginlink{
     display: flex;
     font-size: 1.3em;
     font-weight: 600;
     color: #f1f1f1;
     background-color: black;
     border-radius:  4px;
-    padding: 3px;
+    padding: 5px 10px;
 }

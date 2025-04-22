@@ -3,7 +3,6 @@ import { Link as ScrollLink } from 'react-scroll';
 import { Link as RouterLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { IoMdClose, IoMdMenu } from "react-icons/io";
-import { useScrollPosition } from '../Hooks/scrollsPositions';
 
 const Navbar = () => {
     const [navBarOpen, setNavBarOpen] = useState(false);
@@ -36,14 +35,10 @@ const Navbar = () => {
         { id: 5, link: "InProgress", type: "scroll" },
     ];
 
-    const scrollPosition = useScrollPosition();
-
     return (
         <div className={
             navBarOpen
                 ? styles.navOpen
-                : scrollPosition > 0
-                ? styles.navOnScroll
                 : styles.navBar
         }>
             {!navBarOpen && <p className={styles.logo}>Team Rocket Steal</p>}
@@ -122,7 +117,7 @@ const Navbar = () => {
                         to="Contact"
                         smooth
                         duration={500}
-                        className={styles.contactlink}
+                        className={styles.Loginlink}
                     >
                         Log in
                     </ScrollLink>

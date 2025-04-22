@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-scroll';
 import styles from './Login.module.css';
 
-function Login() {
+function Login() { // Input
     const [form, setForm] = useState({ 
         email: '', 
         password: '' 
@@ -30,7 +30,7 @@ function Login() {
         e.preventDefault();
         if (!validateForm()) return;
 
-        try {
+        try { // Conexion BBDD
             const response = await fetch('http://localhost:5000/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -41,7 +41,7 @@ function Login() {
 
             if (response.ok) {
                 alert(`¡Bienvenido!`);
-                document.getElementById('home-section').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('home-section').scrollIntoView({ behavior: 'smooth' }); // Lleva a pagina Home
             } else {
                 alert(data.message || 'Error al iniciar sesión');
             }

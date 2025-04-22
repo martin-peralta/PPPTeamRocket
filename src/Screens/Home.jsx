@@ -25,6 +25,17 @@ const Home = () => {
         
       </div>
 
+      <div className={styles.TextHome}>
+        <p>
+        Join Team Rocket to level up your Pokémon passion! 
+        Safely store your cards, access exclusive resources, trade with members, and join a bold community. 
+        Protect your rare treasures and dominate battles. Ready to rise? 🚀✨
+        </p>
+
+      </div>
+
+
+
     </div>
     
   )

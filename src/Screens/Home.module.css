@@ -1,19 +1,27 @@
+/*  Fondo Home
+    Orden elementos
+    espacio en la pagina    */
+
 .home{
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     background: linear-gradient(180deg, #ff0000, #d27171);
-    padding: 20px 0px 200px;
+    padding: 20px 0px 100px;
     align-items: center;
 }
+
+/*  Color letra (no muy necesario)   */
 
 .home p{
     color: #f1f1f1;
 }
 
+/*  Titulo basico   */
+
 .titleContainer {
-    font-size: 4em;
+    font-size: 5em;
     padding-top: 80px;
 }
 
@@ -24,6 +32,24 @@
     padding: 10px;
     margin-left: 20px;
     border-radius: 5px;
-    font-size: 1.5em;
+    font-size: 2em;
 
 }
+
+
+/* Modificaciones texto Home*/
+
+.TextHome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 400px 0px 400px;
+    font-size: 1.5em;
+}
+
+
+@media (max-width: 800px) {
+    .TextHome {
+        padding: 20px 20px 20px 20px;
+    }
+  }

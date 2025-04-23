@@ -1,55 +1,59 @@
-/*  Fondo Home
-    Orden elementos
-    espacio en la pagina    */
-
-.home{
-    height: 100%;
+.home {
     width: 100%;
     display: flex;
     flex-direction: column;
     background: linear-gradient(180deg, #ff0000, #d27171);
-    padding: 20px 0px 100px;
+    padding: 20px 0 100px;
     align-items: center;
-}
-
-/*  Color letra (no muy necesario)   */
-
-.home p{
+    box-sizing: border-box;
+    min-height: 100vh;
+  }
+  
+  .home p {
     color: #f1f1f1;
-}
-
-/*  Titulo basico   */
-
-.titleContainer {
-    font-size: 5em;
+    text-align: center;
+  }
+  
+  /* Título responsivo */
+  .titleContainer {
+    font-size: clamp(2.5rem, 5vw, 5em);
     padding-top: 80px;
-}
-
-
-/*  Botones del Home    */
-.callToAction{
+    text-align: center;
+  }
+  
+  /* Botones */
+  .callToAction {
     background-color: rgb(34, 232, 166);
-    padding: 10px;
-    margin-left: 20px;
+    padding: 10px 20px;
+    margin: 10px;
     border-radius: 5px;
-    font-size: 2em;
-
-}
-
-
-/* Modificaciones texto Home*/
-
-.TextHome {
+    font-size: 1.5em;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+  }
+  
+  /* Texto Home - Adaptable */
+  .TextHome {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 400px 0px 400px;
-    font-size: 1.5em;
-}
-
-
-@media (max-width: 800px) {
+    padding: 20px;
+    font-size: 1.2em;
+    max-width: 90%;
+  }
+  
+  @media (min-width: 768px) {
     .TextHome {
-        padding: 20px 20px 20px 20px;
+      font-size: 1.4em;
+      padding: 20px 100px;
     }
   }
+  
+  @media (min-width: 1200px) {
+    .TextHome {
+      font-size: 1.5em;
+      padding: 20px 400px;
+    }
+  }
+  

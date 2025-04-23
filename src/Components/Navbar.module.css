@@ -1,116 +1,58 @@
 
-/* creacion clases navbar */
-
-.navBar{
+.navBar {
     display: flex;
     height: 60px;
     width: 100%;
-    position: absolute;
+    position: sticky;
+    top: 0;
     justify-content: space-around;
     align-items: center;
-    background: linear-gradient(180deg, #4b1717, #ff0000);;
-}
-
-
-.navOpen {
-    display: flex;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: #343434f5;
-    flex-direction: column;
-    align-items: center;
-}
-
-.navLink {
-    display: flex;
-    font-size: 2em;
-    font-weight: 400;
-    color: #f1f1f1;
-    padding-top: 90px;
-}
-
-.navLink:hover {
-    cursor: pointer;
-}
-
-
-/* modificar en el futuro
-
-
- .border{
-    animation-name: borderanimation;
-    height: 1px;
-    animation-duration: 1s;
-    background-color: rgb(87, 158, 158);
-} */
-
-/* en proceso*/
-
-@keyframes borderanimation {
-    0%{
-        height: 0px;
-    }
-    100%{
-        height: 1px;
-    }
-    
-}
-
-/* Navbar*/
-
-.logo {
-    display: flex;
+    background: linear-gradient(180deg, #4b1717, #ff0000);
+    z-index: 100;
+  }
+  
+  .logo {
     color: #f1f1f1;
     font-weight: 600;
-}
-
-
-/* Navbar con tamaño menor a 800px*/
-
-@media (min-width: 800px){
-    .logo {
-        font-size: 1.3em;
-    }
-    .navBar {
-        align-content: center;
-        align-items: center;
-        justify-content: space-evenly;
-        height: 50px;
-    }
-    .linksContainer{
-        display: flex;
-        width: 70%;
-        flex-direction: row;
-        justify-content: space-evenly;
-    }
-    .navLink{
-        font-weight: 700;
-        padding-top: 4px;
-        font-size: 1.3em;
-        transition: 0.5s;
-    }
-    .navLink:hover{
-        font-size: 1.5em;
-    }
-} 
-
-
-
-
-
-
-/*
- Borde para el navbar en contacto
- para usar despues en el Sign Up u otra opción
-*/
-
-.Loginlink{
-    display: flex;
     font-size: 1.3em;
-    font-weight: 600;
+  }
+  
+  .linksContainer {
+    display: none;
+  }
+  
+  .navLink {
+    font-size: 1.2em;
+    font-weight: 500;
     color: #f1f1f1;
-    background-color: black;
-    border-radius:  4px;
-    padding: 5px 10px;
-}
+    margin: 10px 0;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  /* Navbar tablets y escritorio */
+  @media (min-width: 768px) {
+    .navBar {
+      height: 70px;
+      justify-content: space-evenly;
+    }
+  
+    .linksContainer {
+      display: flex;
+      width: 70%;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+  
+    .navLink {
+      font-size: 1.3em;
+      font-weight: 700;
+      margin: 0;
+      transition: 0.3s;
+    }
+  
+    .navLink:hover {
+      font-size: 1.4em;
+    }
+  }
+  

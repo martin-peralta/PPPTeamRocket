@@ -1,5 +1,5 @@
 import express from 'express';
-import PokemonCard from '../models/PokemonCardModel.js';
+import PokemonCard from '../models/CardModel.js';
 
 const router = express.Router();
 

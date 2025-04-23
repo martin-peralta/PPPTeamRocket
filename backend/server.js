@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './TRdb.js';
 import authRoutes from './routes/authRoutes.js';
-import cardRoutes from '.cardRoutes.js'; 
+import cardRoutes from './routes/cardRoutes.js'; 
 
 dotenv.config();
 connectDB(); 

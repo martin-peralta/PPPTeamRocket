@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-scroll';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Register.module.css';
 
 function Register() {
-    const [form, setForm] = useState({ 
-        name: '', 
-        email: '', 
+    const [form, setForm] = useState({
+        name: '',
+        email: '',
         password: '',
-        confirmPassword: '' 
+        confirmPassword: ''
     });
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -50,8 +51,7 @@ function Register() {
 
             if (response.ok) {
                 alert('Registro exitoso. Ahora puedes iniciar sesión.');
-                // Lleva automatico al Login con scroll 
-                document.getElementById('login-section').scrollIntoView({ behavior: 'smooth' });
+                navigate('/login');
             } else {
                 alert(data.message || 'Error al registrar usuario');
             }
@@ -61,9 +61,9 @@ function Register() {
     };
 
     return (
-        <div id="register-section" className={styles.registerContainer}>
+        <div className={styles.registerContainer}>
             <h2 className={styles.title}>Registro</h2>
-            
+
             <form onSubmit={handleRegister} className={styles.form}>
                 <div className={styles.inputGroup}>
                     <input
@@ -93,7 +93,7 @@ function Register() {
                     <input
                         type="password"
                         name="password"
-                        placeholder="Contraseña (mínimo 6 caracteres)"
+                        placeholder="Contraseña"
                         value={form.password}
                         onChange={handleChange}
                         className={`${styles.input} ${errors.password ? styles.errorInput : ''}`}
@@ -120,12 +120,7 @@ function Register() {
 
             <div className={styles.footer}>
                 <p>¿Ya tienes cuenta? </p>
-                <Link 
-                    to="login-section" 
-                    smooth 
-                    duration={500} 
-                    className={styles.link}
-                >
+                <Link to="/login" className={styles.link}>
                     Inicia sesión aquí
                 </Link>
             </div>

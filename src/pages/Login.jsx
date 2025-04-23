@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-scroll';
+import { useNavigate, Link } from 'react-router-dom';
 import styles from './Login.module.css';
+import { useAuth } from '../context/AuthContext';
 
-function Login() { // Input
-    const [form, setForm] = useState({ 
-        email: '', 
-        password: '' 
-    });
+function Login() {
+    const [form, setForm] = useState({ email: '', password: '' });
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -21,7 +21,6 @@ function Login() { // Input
         if (!form.email) newErrors.email = 'Email es requerido';
         if (!form.password) newErrors.password = 'Contraseña es requerida';
         else if (form.password.length < 6) newErrors.password = 'Mínimo 6 caracteres';
-        
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -30,7 +29,7 @@ function Login() { // Input
         e.preventDefault();
         if (!validateForm()) return;
 
-        try { // Conexion BBDD
+        try {
             const response = await fetch('http://localhost:5000/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -38,22 +37,25 @@ function Login() { // Input
             });
 
             const data = await response.json();
+            console.log('LOGIN RESPONSE:', data); // ← Útil para debugging
 
-            if (response.ok) {
-                alert(`¡Bienvenido!`);
-                document.getElementById('home-section').scrollIntoView({ behavior: 'smooth' }); // Lleva a pagina Home
+            if (response.ok && data.token && data.user) {
+                login({ user: data.user, token: data.token });
+                alert(`¡Bienvenido ${data.user.name}!`);
+                navigate('/');
             } else {
-                alert(data.message || 'Error al iniciar sesión');
+                alert(data.message || 'Credenciales inválidas');
             }
         } catch (error) {
-            alert('Error de conexión');
+            console.error('Login error:', error);
+            alert('Error de conexión con el servidor');
         }
     };
 
     return (
-        <div id="login-section" className={styles.loginContainer}>
+        <div className={styles.loginContainer}>
             <h2 className={styles.title}>Iniciar Sesión</h2>
-            
+
             <form onSubmit={handleLogin} className={styles.form}>
                 <div className={styles.inputGroup}>
                     <input
@@ -86,12 +88,7 @@ function Login() { // Input
 
             <div className={styles.footer}>
                 <p>¿No tienes cuenta? </p>
-                <Link 
-                    to="register-section" 
-                    smooth 
-                    duration={500} 
-                    className={styles.link}
-                >
+                <Link to="/register" className={styles.link}>
                     Regístrate aquí
                 </Link>
             </div>

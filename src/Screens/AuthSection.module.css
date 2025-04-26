@@ -1,0 +1,20 @@
+.authContainer {
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  
+  .section {
+    margin-bottom: 3rem;
+  }
+  
+  .authLinks {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .link {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+  }

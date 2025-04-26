@@ -1,36 +1,30 @@
 import mongoose from 'mongoose';
 
-const PokemonCardSchema = new mongoose.Schema({
-  nombre: {
+const CardSchema = new mongoose.Schema({
+  id: { // ID oficial de la carta en la API PokémonTCG
     type: String,
     required: true,
-    trim: true
   },
-  tipo: {
+  name: {
     type: String,
-    required: true
-  },
-  ataque: {
-    type: Number,
     required: true,
-    min: 0
   },
-  defensa: {
-    type: Number,
+  image: {
+    type: String,
     required: true,
-    min: 0
   },
-  rareza: {
+  types: [{ 
     type: String,
-    enum: ['común', 'rara', 'épica', 'legendaria'],
-    default: 'común'
-  },
-  imagenUrl: {
+  }],
+  rarity: {
     type: String,
-    required: true
   },
-  
-});
+  user: { // Usuario dueño de esta carta
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+}, { timestamps: true }); // opcional: guarda createdAt y updatedAt
 
-const PokemonCard = mongoose.model('PokemonCard', PokemonCardSchema);
-export default PokemonCard;
+const Card = mongoose.model('Card', CardSchema);
+export default Card;

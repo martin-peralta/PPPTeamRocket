@@ -1,0 +1,65 @@
+.searchContainer {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .form {
+    margin-bottom: 2rem;
+  }
+  
+  .input {
+    padding: 0.5rem;
+    width: 250px;
+    margin-right: 1rem;
+  }
+  
+  .button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .loading {
+    font-style: italic;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 1rem;
+  }
+  
+  .cardsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .card {
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 150px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .cardImage {
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .cardName {
+    font-weight: bold;
+    margin-top: 0.5rem;
+  }
+  
+  .cardRarity {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  

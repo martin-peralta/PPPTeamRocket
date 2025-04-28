@@ -1,30 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
-// Pages 
+// Pages
 import Home from './Screens/Home';
-import Cards from './Screens/Cards';
-import Account from './Screens/Account'; 
+import Account from './Screens/Account';
+import SearchCards from './Screens/SearchCards';
+import CardDetail from './Screens/CardDetail'; // 🔥 Importamos el nuevo componente
 
 // Components
 import Footer from './Components/Footer';
 import Navbar from './Components/Navbar';
 
-
 function App() {
   return (
     <div className="App">
-      <Router>
-       <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Account" element={<Account />} />
-          <Route path="/Cards" element={<Cards />} />
-        </Routes>
-        <Footer />
-      </Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/cards" element={<SearchCards />} />
+        <Route path="/cards/:id" element={<CardDetail />} /> {/* 🔥 Nueva ruta para detalle */}
+      </Routes>
+      <Footer />
     </div>
   );
 }
-
 
 export default App;

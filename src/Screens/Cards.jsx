@@ -4,21 +4,18 @@ import { Link } from "react-scroll"
 
 
 
-const Home = () => {
+const Cards = () => {
   return (
-    
     <div className={styles.home}>
       <div className={styles.titleContainer}>
-          <p>
-            Cards
-          </p>
+        <p>Cards</p>
       </div>
     </div>
-    
-  )
+  );
 }
 
-export default Home
+export default Cards;
+
 
 
 

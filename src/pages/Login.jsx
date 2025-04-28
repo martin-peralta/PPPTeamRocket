@@ -18,9 +18,9 @@ function Login() {
 
     const validateForm = () => {
         const newErrors = {};
-        if (!form.email) newErrors.email = 'Email es requerido';
-        if (!form.password) newErrors.password = 'Contraseña es requerida';
-        else if (form.password.length < 6) newErrors.password = 'Mínimo 6 caracteres';
+        if (!form.email) newErrors.email = 'Email is required';
+        if (!form.password) newErrors.password = 'Password is required';
+        else if (form.password.length < 6) newErrors.password = 'Min 6 characters';
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -37,31 +37,30 @@ function Login() {
             });
 
             const data = await response.json();
-            console.log('LOGIN RESPONSE:', data); // ← Útil para debugging
 
             if (response.ok && data.token && data.user) {
                 login({ user: data.user, token: data.token });
-                alert(`¡Bienvenido ${data.user.name}!`);
+                alert(`¡Welcome Back ${data.user.name}! 🚀`);
                 navigate('/');
             } else {
-                alert(data.message || 'Credenciales inválidas');
+                alert(data.message || 'Invalid credentials');
             }
         } catch (error) {
             console.error('Login error:', error);
-            alert('Error de conexión con el servidor');
+            alert('¡Error connecting!');
         }
     };
 
     return (
         <div className={styles.loginContainer}>
-            <h2 className={styles.title}>Iniciar Sesión</h2>
+            <h2 className={styles.title}>Access to your collection</h2>
 
             <form onSubmit={handleLogin} className={styles.form}>
                 <div className={styles.inputGroup}>
                     <input
                         type="email"
                         name="email"
-                        placeholder="Correo Electrónico"
+                        placeholder="Email"
                         value={form.email}
                         onChange={handleChange}
                         className={`${styles.input} ${errors.email ? styles.errorInput : ''}`}
@@ -73,7 +72,7 @@ function Login() {
                     <input
                         type="password"
                         name="password"
-                        placeholder="Contraseña"
+                        placeholder="Password"
                         value={form.password}
                         onChange={handleChange}
                         className={`${styles.input} ${errors.password ? styles.errorInput : ''}`}
@@ -82,14 +81,14 @@ function Login() {
                 </div>
 
                 <button type="submit" className={styles.button}>
-                    Iniciar Sesión
+                    🔓 Log in
                 </button>
             </form>
 
             <div className={styles.footer}>
-                <p>¿No tienes cuenta? </p>
+                <p>New recruit? </p>
                 <Link to="/register" className={styles.link}>
-                    Regístrate aquí
+                    Join us here
                 </Link>
             </div>
         </div>

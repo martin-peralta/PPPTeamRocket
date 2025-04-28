@@ -1,58 +1,116 @@
-
+/* Estilos base del Navbar */
 .navBar {
     display: flex;
-    height: 60px;
+    height: 90px;
     width: 100%;
     position: sticky;
     top: 0;
     justify-content: space-around;
     align-items: center;
     background: linear-gradient(180deg, #4b1717, #ff0000);
-    z-index: 100;
-  }
-  
-  .logo {
+    z-index: 1000;
+    border: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Menú móvil abierto - Corregido */
+.navOpen {
+    display: flex;
+    position: fixed;
+    height: calc(100vh - 90px);
+    width: 100%;
+    top: 90px;
+    background: #252525f3;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    z-index: 999;
+}
+
+/* Logo */
+.logo {
     color: #f1f1f1;
     font-weight: 600;
     font-size: 1.3em;
-  }
-  
-  .linksContainer {
-    display: none;
-  }
-  
-  .navLink {
+    margin: 0;
+}
+
+/* Contenedor de enlaces */
+.linksContainer {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Enlaces */
+.navLink {
+    display: flex;
     font-size: 1.2em;
     font-weight: 500;
     color: #f1f1f1;
     margin: 10px 0;
     cursor: pointer;
-    text-align: center;
-  }
-  
-  /* Navbar tablets y escritorio */
-  @media (min-width: 768px) {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.navLink:hover {
+    color: #ffffff;
+}
+
+/* Responsive para escritorio */
+@media (min-width: 800px) {
     .navBar {
-      height: 70px;
-      justify-content: space-evenly;
+        height: 70px;
+        justify-content: space-evenly;
     }
-  
+    
     .linksContainer {
-      display: flex;
-      width: 70%;
-      flex-direction: row;
-      justify-content: space-evenly;
+        display: flex;
+        width: 70%;
+        justify-content: space-evenly;
+        align-items: center;
     }
-  
+    
     .navLink {
-      font-size: 1.3em;
-      font-weight: 700;
-      margin: 0;
-      transition: 0.3s;
+        font-size: 1.3em;
+        font-weight: 700;
+        padding-top: 5px;
     }
-  
+    
     .navLink:hover {
-      font-size: 1.4em;
+        font-size: 1.5em;
     }
-  }
-  
+}
+
+/* Estilos móvil - Corregido */
+@media (max-width: 799px) {
+    .navLink {
+        font-size: 2em;
+        padding-top: 30px;
+    }
+    
+    .navOpen .navLink {
+        margin: 25px 0;
+    }
+    
+    .navOpen {
+        top: 0px;
+        height: calc(100vh - 70px);
+        background: #1a1a1af3;
+    }
+}
+
+/* Añadir en tu CSS global */
+.main-content {
+    margin-top: 90px;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 799px) {
+    .main-content {
+        margin-top: 70px;
+    }
+}

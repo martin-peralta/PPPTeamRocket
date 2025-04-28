@@ -21,12 +21,12 @@ function Register() {
 
     const validateForm = () => {
         const newErrors = {};
-        if (!form.name) newErrors.name = 'Nombre es requerido';
-        if (!form.email) newErrors.email = 'Email es requerido';
-        else if (!/^\S+@\S+\.\S+$/.test(form.email)) newErrors.email = 'Email no válido';
-        if (!form.password) newErrors.password = 'Contraseña es requerida';
-        else if (form.password.length < 6) newErrors.password = 'Mínimo 6 caracteres';
-        if (form.password !== form.confirmPassword) newErrors.confirmPassword = 'Las contraseñas no coinciden';
+        if (!form.name) newErrors.name = 'Name is required';
+        if (!form.email) newErrors.email = 'Email is required';
+        else if (!/^\S+@\S+\.\S+$/.test(form.email)) newErrors.email = 'Email not valid';
+        if (!form.password) newErrors.password = 'Password is required';
+        else if (form.password.length < 6) newErrors.password = 'Min 6 characters';
+        if (form.password !== form.confirmPassword) newErrors.confirmPassword = 'Passwords dont match';
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -50,26 +50,26 @@ function Register() {
             const data = await response.json();
 
             if (response.ok) {
-                alert('Registro exitoso. Ahora puedes iniciar sesión.');
+                alert('¡Register succesful!');
                 navigate('/login');
             } else {
-                alert(data.message || 'Error al registrar usuario');
+                alert(data.message || 'Error joining the team');
             }
         } catch (error) {
-            alert('Error de conexión');
+            alert('¡Error connecting!');
         }
     };
 
     return (
         <div className={styles.registerContainer}>
-            <h2 className={styles.title}>Registro</h2>
+            <h2 className={styles.title}>Join Team Rocket</h2>
 
             <form onSubmit={handleRegister} className={styles.form}>
                 <div className={styles.inputGroup}>
                     <input
                         type="text"
                         name="name"
-                        placeholder="Nombre completo"
+                        placeholder="Full Name"
                         value={form.name}
                         onChange={handleChange}
                         className={`${styles.input} ${errors.name ? styles.errorInput : ''}`}
@@ -81,7 +81,7 @@ function Register() {
                     <input
                         type="email"
                         name="email"
-                        placeholder="Correo electrónico"
+                        placeholder="Email"
                         value={form.email}
                         onChange={handleChange}
                         className={`${styles.input} ${errors.email ? styles.errorInput : ''}`}
@@ -93,7 +93,7 @@ function Register() {
                     <input
                         type="password"
                         name="password"
-                        placeholder="Contraseña"
+                        placeholder="Password"
                         value={form.password}
                         onChange={handleChange}
                         className={`${styles.input} ${errors.password ? styles.errorInput : ''}`}
@@ -105,7 +105,7 @@ function Register() {
                     <input
                         type="password"
                         name="confirmPassword"
-                        placeholder="Confirmar contraseña"
+                        placeholder="Confirm Password"
                         value={form.confirmPassword}
                         onChange={handleChange}
                         className={`${styles.input} ${errors.confirmPassword ? styles.errorInput : ''}`}
@@ -114,14 +114,14 @@ function Register() {
                 </div>
 
                 <button type="submit" className={styles.button}>
-                    Registrarse
+                    🚀 ¡Sing up!
                 </button>
             </form>
 
             <div className={styles.footer}>
-                <p>¿Ya tienes cuenta? </p>
+                <p>Already a member? </p>
                 <Link to="/login" className={styles.link}>
-                    Inicia sesión aquí
+                    🔑 Log in Here
                 </Link>
             </div>
         </div>

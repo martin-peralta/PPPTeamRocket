@@ -6,12 +6,12 @@ const Footer = () => {
   return (
     <footer className={styles.Footer}>
       <div className={styles.footerContent}>
-        <img className={styles.Image} src={logo} alt="Logo de la aplicación" />
+        <img className={styles.Image} src={logo} alt="Logo" />
         <p>
-          Contáctanos en: <br />
-          <b>Teléfono:</b> +56 9 1234 5678 <br />
-          <b>Redes Sociales:</b> @miapp (Instagram, Twitter) <br />
-          <b>Email:</b> contacto@miapp.com
+          Contact: <br />
+          <b>Number:</b> +56 9 1234 5678 <br />
+          <b>Social Media:</b> @TRts (Instagram, Twitter) <br />
+          <b>Email:</b> meowth@TRts.com
         </p>
       </div>
     </footer>

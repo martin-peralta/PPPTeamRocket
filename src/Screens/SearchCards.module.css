@@ -39,8 +39,9 @@
   border: none;
   border-radius: 8px;
   background-color: #00d084;
+
   color: white;
-  font-size: 1.1rem;
+  font-size: 1.5em;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
 }

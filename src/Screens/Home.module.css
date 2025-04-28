@@ -55,5 +55,26 @@
       font-size: 1.5em;
       padding: 20px 400px;
     }
+    .callToAction {
+      display: inline-block;
+      margin: 1rem;
+      padding: 0.8rem 2rem;
+      font-size: 1.2rem;
+      background-color: #00d084;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    }
+    
+    .callToAction:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      background-color: #00b378; /* Un poco más oscuro al pasar el mouse */
+    }
+    
   }
   

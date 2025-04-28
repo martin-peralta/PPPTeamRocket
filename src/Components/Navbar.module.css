@@ -54,5 +54,24 @@
     .navLink:hover {
       font-size: 1.4em;
     }
+    .loginButton {
+      background-color: #ac0000;
+      border: none;
+      color: white;
+      padding: 8px 20px;
+      margin-left: 1rem;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .loginButton:hover {
+      background-color: #860000;
+      transform: scale(1.05);
+  }
+  
+  
   }
   

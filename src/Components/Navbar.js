@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // 🔥 Importamos useAuth
 import styles from './Navbar.module.css';
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 
 const Navbar = () => {
     const [navBarOpen, setNavBarOpen] = useState(false);
+    const { auth, logout } = useAuth(); // 🔥 auth y logout
+    const navigate = useNavigate();
 
     const [windowDimension, setWindowDimension] = useState({
         height: window.innerHeight,
@@ -27,22 +30,22 @@ const Navbar = () => {
         };
     }, [windowDimension]);
 
+    const handleLogout = () => {
+        logout();
+        navigate('/'); // 🔥 Redirigir a Home después de cerrar sesión
+    };
 
     const links = [
         { id: 1, link: "Home", to: "/", type: "route" },
-        { id: 2, link: "Account", to: "/account", type: "route" }, 
-        { id: 3, link: "Cards",to:'/cards', type: "route" },
+        { id: 2, link: "Account", to: "/account", type: "route" },
+        { id: 3, link: "Cards", to: "/cards", type: "route" },
         { id: 5, link: "InProgress", type: "scroll" },
     ];
 
     return (
-        <div className={
-            navBarOpen
-                ? styles.navOpen
-                : styles.navBar
-        }>
+        <div className={navBarOpen ? styles.navOpen : styles.navBar}>
             {!navBarOpen && <p className={styles.logo}>Team Rocket Steal</p>}
-            
+
             {!navBarOpen && windowDimension.width < 800 ? (
                 <IoMdMenu
                     onClick={() => setNavBarOpen(!navBarOpen)}
@@ -69,7 +72,7 @@ const Navbar = () => {
                                     duration={500}
                                     className={styles.navLink}
                                 >
-                                    {x.link === "PokeCards" ? "Poke Cards" : x.link}
+                                    {x.link}
                                 </ScrollLink>
                             ) : (
                                 <RouterLink
@@ -83,6 +86,27 @@ const Navbar = () => {
                             <div className={styles.border}></div>
                         </div>
                     ))}
+
+                    {/* 🔥 Botón dinámico para móvil */}
+                    {!auth ? (
+                        <RouterLink
+                            to="/login"
+                            onClick={() => setNavBarOpen(false)}
+                            className={styles.loginButton}
+                        >
+                            Log In
+                        </RouterLink>
+                    ) : (
+                        <button
+                            onClick={() => {
+                                handleLogout();
+                                setNavBarOpen(false);
+                            }}
+                            className={styles.loginButton}
+                        >
+                            Log Out ({auth.user.name})
+                        </button>
+                    )}
                 </ul>
             )}
 
@@ -98,7 +122,7 @@ const Navbar = () => {
                                     duration={500}
                                     className={styles.navLink}
                                 >
-                                    {x.link === "PokeCards" ? "Poke Cards" : x.link}
+                                    {x.link}
                                 </ScrollLink>
                             ) : (
                                 <RouterLink
@@ -112,15 +136,20 @@ const Navbar = () => {
                             <div className={styles.border}></div>
                         </div>
                     ))}
-                    <ScrollLink
-                        onClick={() => setNavBarOpen(false)}
-                        to="Contact"
-                        smooth
-                        duration={500}
-                        className={styles.Loginlink}
-                    >
-                        Log in
-                    </ScrollLink>
+
+                    {/* 🔥 Botón dinámico para escritorio */}
+                    {!auth ? (
+                        <RouterLink to="/login" className={styles.loginButton}>
+                            Log In
+                        </RouterLink>
+                    ) : (
+                        <button
+                            onClick={handleLogout}
+                            className={styles.loginButton}
+                        >
+                            Log Out ({auth.user.name})
+                        </button>
+                    )}
                 </ul>
             )}
         </div>

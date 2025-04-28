@@ -12,6 +12,7 @@
     color: #333;
     margin-bottom: 2rem;
     font-size: 2rem;
+    text-align: center;
 }
 
 .form {
@@ -21,18 +22,24 @@
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .inputGroup {
+    width: 100%;
     margin-bottom: 1.5rem;
 }
 
 .input {
-    width: 100%;
+    width: 92%; /* 🔥 Antes era 100%, ahora 80% */
     padding: 0.8rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
+    margin: 0 auto; /* 🔥 Esto centra horizontalmente */
+    display: block;
 }
 
 .errorInput {
@@ -49,7 +56,7 @@
 .button {
     width: 100%;
     padding: 0.8rem;
-    background-color: #4CAF50;
+    background-color: red;
     color: white;
     border: none;
     border-radius: 5px;
@@ -59,20 +66,21 @@
 }
 
 .button:hover {
-    background-color: #45a049;
+    background-color: #ac0101;
 }
 
 .footer {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     text-align: center;
+    font-size: 0.9rem;
     color: #666;
 }
 
 .link {
-    color: #4CAF50;
+    color: #ff0000;
     text-decoration: none;
     font-weight: bold;
-    cursor: pointer;
+    margin-left: 0.3rem;
 }
 
 .link:hover {

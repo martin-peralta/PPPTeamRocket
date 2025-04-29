@@ -59,6 +59,28 @@
     color: #ffffff;
 }
 
+.loginButton {
+    background-color: rgb(34, 232, 166);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    margin-left: 1rem;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginButton:hover {
+    background-color: #00d084;;
+    transform: scale(1.05);
+}
+
 /* Responsive para escritorio */
 @media (min-width: 800px) {
     .navBar {

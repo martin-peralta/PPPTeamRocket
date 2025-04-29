@@ -7,8 +7,8 @@ import SearchCards from './Screens/SearchCards';
 import CardDetail from './Screens/CardDetail';
 
 // Auth Pages
-import Login from './pages/Login'; // 🔥 Importamos Login
-import Register from './pages/Register'; // 🔥 Importamos Register
+import Login from './pages/Login'; 
+import Register from './pages/Register'; 
 
 // Components
 import Footer from './Components/Footer';
@@ -31,8 +31,8 @@ function App() {
         <Route path="/account" element={<Account />} />
         <Route path="/cards/:id" element={<CardDetail />} />
         <Route path="/cards" element={<SearchCards />} />
-        <Route path="/login" element={<Login />} /> {/* 🔥 Nueva ruta Login */}
-        <Route path="/register" element={<Register />} /> {/* 🔥 Nueva ruta Register */}
+        <Route path="/login" element={<Login />} /> 
+        <Route path="/register" element={<Register />} /> 
         <Route path="/loadingscreen" element={<Loading />} />
       </Routes>
       <Footer />

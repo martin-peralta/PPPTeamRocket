@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // 🔥 Importamos el contexto de autenticación
+import { toast } from 'react-toastify';
 import styles from './Navbar.module.css';
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 
-// Toast
-import { toast } from 'react-toastify';
 
 const Navbar = () => {
     const [navBarOpen, setNavBarOpen] = useState(false);
+    const { auth, logout } = useAuth(); // 🔥 auth y logout
+    const navigate = useNavigate();
+
     const [windowDimension, setWindowDimension] = useState({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -32,8 +35,13 @@ const Navbar = () => {
         { id: 2, link: "Account", to: "/account", type: "route" }, 
         { id: 3, link: "Cards", to: "/cards", type: "route" },
         { id: 4, link: "InProgress", to: "inprogress", type: "scroll" },
-        { id: 5, link: "Log In", to: "/login", type: "route" }, 
     ];
+
+    const handleLogout = () => {
+        logout();
+        navigate('/'); // 🔥 Al hacer logout, redirigir al home
+        setNavBarOpen(false);
+    };
 
     return (
         <div className={navBarOpen ? styles.navOpen : styles.navBar}>
@@ -60,7 +68,6 @@ const Navbar = () => {
                     {links.map((x) => (
                         <li key={x.id} style={{ listStyle: "none" }}>
                             {x.link === "InProgress" ? (
-                                // Si el link es InProgress, mostrar un botón que dispare el toast
                                 <button
                                     onClick={() => {
                                         toast.info("Work in progress 🚧", {
@@ -75,7 +82,6 @@ const Navbar = () => {
                                     {x.link}
                                 </button>
                             ) : x.type === "scroll" ? (
-                                // Si es de tipo scroll, usar ScrollLink
                                 <ScrollLink
                                     activeClass="active"
                                     to={x.to}
@@ -89,7 +95,6 @@ const Navbar = () => {
                                     {x.link}
                                 </ScrollLink>
                             ) : (
-                                // Si no, usar RouterLink normal
                                 <RouterLink
                                     to={x.to}
                                     onClick={() => setNavBarOpen(false)}
@@ -100,6 +105,24 @@ const Navbar = () => {
                             )}
                         </li>
                     ))}
+
+                    {/* 🔥 Botón dinámico Log In / Log Out */}
+                    {!auth ? (
+                        <RouterLink
+                            to="/login"
+                            onClick={() => setNavBarOpen(false)}
+                            className={styles.loginButton}
+                        >
+                            Log In
+                        </RouterLink>
+                    ) : (
+                        <button
+                            onClick={handleLogout}
+                            className={styles.loginButton}
+                        >
+                            Log Out ({auth.user.name})
+                        </button>
+                    )}
                 </ul>
             )}
         </div>

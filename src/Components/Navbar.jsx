@@ -4,6 +4,9 @@ import { Link as RouterLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { IoMdClose, IoMdMenu } from "react-icons/io";
 
+// Toast
+import { toast } from 'react-toastify';
+
 const Navbar = () => {
     const [navBarOpen, setNavBarOpen] = useState(false);
     const [windowDimension, setWindowDimension] = useState({
@@ -56,7 +59,23 @@ const Navbar = () => {
                 <ul className={styles.linksContainer}>
                     {links.map((x) => (
                         <li key={x.id} style={{ listStyle: "none" }}>
-                            {x.type === "scroll" ? (
+                            {x.link === "InProgress" ? (
+                                // Si el link es InProgress, mostrar un botón que dispare el toast
+                                <button
+                                    onClick={() => {
+                                        toast.info("Work in progress 🚧", {
+                                            position: "top-center",
+                                            autoClose: 2000,
+                                        });
+                                        setNavBarOpen(false);
+                                    }}
+                                    className={styles.navLink}
+                                    style={{ background: "none", border: "none", cursor: "pointer" }}
+                                >
+                                    {x.link}
+                                </button>
+                            ) : x.type === "scroll" ? (
+                                // Si es de tipo scroll, usar ScrollLink
                                 <ScrollLink
                                     activeClass="active"
                                     to={x.to}
@@ -70,6 +89,7 @@ const Navbar = () => {
                                     {x.link}
                                 </ScrollLink>
                             ) : (
+                                // Si no, usar RouterLink normal
                                 <RouterLink
                                     to={x.to}
                                     onClick={() => setNavBarOpen(false)}

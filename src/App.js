@@ -14,10 +14,18 @@ import Register from './pages/Register'; // 🔥 Importamos Register
 import Footer from './Components/Footer';
 import Navbar from './Components/Navbar';
 
+// Toast
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Loading Screen
+import Loading from './pages/Loading';
+
 function App() {
   return (
     <div>
       <Navbar />
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/account" element={<Account />} />
@@ -25,6 +33,7 @@ function App() {
         <Route path="/cards" element={<SearchCards />} />
         <Route path="/login" element={<Login />} /> {/* 🔥 Nueva ruta Login */}
         <Route path="/register" element={<Register />} /> {/* 🔥 Nueva ruta Register */}
+        <Route path="/loadingscreen" element={<Loading />} />
       </Routes>
       <Footer />
     </div>

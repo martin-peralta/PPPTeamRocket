@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Loading.css';  // Importa los estilos
 
-import logo from './assets/logomasterball.png';  // Imagen de la carga
+import logo from '../Assets/logomasterball.png';  // Imagen de la carga
 
 function Loading() {
   const [progress, setProgress] = useState(0);

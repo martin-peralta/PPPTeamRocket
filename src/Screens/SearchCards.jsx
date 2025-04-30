@@ -1,5 +1,9 @@
+
+
+
+/*  Librerias y componentes    */
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // 🔥 Importamos Link
+import { Link } from 'react-router-dom'; // Importamos Link
 import styles from './SearchCards.module.css'; // Your CSS module
 
 function SearchCards() {
@@ -9,7 +13,7 @@ function SearchCards() {
   const [error, setError] = useState('');
   const [searchExecuted, setSearchExecuted] = useState(false);
 
-  // 🔥 Recuperar búsqueda anterior si existe
+  // Recuperar búsqueda anterior si existe
   useEffect(() => {
     const storedSearchTerm = localStorage.getItem('searchTerm');
     const storedCards = localStorage.getItem('cards');
@@ -39,7 +43,7 @@ function SearchCards() {
       const data = await response.json();
       setCards(data);
 
-      // 🔥 Guardar en localStorage
+      // Guardar en localStorage
       localStorage.setItem('searchTerm', searchTerm);
       localStorage.setItem('cards', JSON.stringify(data));
     } catch (error) {
@@ -75,7 +79,7 @@ function SearchCards() {
             cards.map(card => (
               <Link
                 key={card.id}
-                to={`/cards/${card.id}`} // 🔥 Link dinámico al detalle
+                to={`/cards/${card.id}`} // Link dinámico al detalle
                 className={styles.cardLink}
               >
                 <div className={styles.card}>

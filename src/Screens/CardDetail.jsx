@@ -1,3 +1,7 @@
+
+
+
+/*  Librerias y componentes    */
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom'; // 🔥 importamos useLocation
 import styles from './CardDetail.module.css';

@@ -1,22 +1,30 @@
+
+
+
+/*  Librerias y componentes    */
 import React, { useEffect, useState } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // 🔥 Importamos el contexto de autenticación
-import { toast } from 'react-toastify';
-import styles from './Navbar.module.css';
-import { IoMdClose, IoMdMenu } from "react-icons/io";
+import { useAuth } from '../context/AuthContext'; 
+import { toast } from 'react-toastify';                                 //Notificaciones/Toast
+import { IoMdClose, IoMdMenu } from "react-icons/io";                   //Icono barra menu 
+
+import styles from './Navbar.module.css'; //estilo css module
 
 
 const Navbar = () => {
     const [navBarOpen, setNavBarOpen] = useState(false);
-    const { auth, logout } = useAuth(); // 🔥 auth y logout
+    const { auth, logout } = useAuth(); // auth y logout
     const navigate = useNavigate();
 
+
+    /*  Estados dimensiones de la ventana*/
     const [windowDimension, setWindowDimension] = useState({
         width: window.innerWidth,
         height: window.innerHeight,
     });
 
+    /*  Detector cambios de tamaño ventana*/
     const detectDimension = () => {
         setWindowDimension({
             width: window.innerWidth,
@@ -25,11 +33,13 @@ const Navbar = () => {
     };
 
     useEffect(() => {
-        window.addEventListener('resize', detectDimension);
+        window.addEventListener('resize', detectDimension); //Manejo de dimensiones
         if (windowDimension.width > 800) setNavBarOpen(false);
         return () => window.removeEventListener('resize', detectDimension);
     }, [windowDimension]);
 
+
+    /*  Enlaces*/
     const links = [
         { id: 1, link: "Home", to: "/", type: "route" },
         { id: 2, link: "Account", to: "/account", type: "route" }, 
@@ -37,16 +47,21 @@ const Navbar = () => {
         { id: 4, link: "InProgress", to: "inprogress", type: "scroll" },
     ];
 
+
+    /*  Manejo Sesion cierre*/
     const handleLogout = () => {
         logout();
-        navigate('/'); // 🔥 Al hacer logout, redirigir al home
+        navigate('/'); 
         setNavBarOpen(false);
     };
 
     return (
         <div className={navBarOpen ? styles.navOpen : styles.navBar}>
+
+            {/*  "Logo"*/}
             {!navBarOpen && <p className={styles.logo}>Team Rocket Steal</p>}
             
+            {/*  Menu que abre y cierra*/}
             {windowDimension.width < 800 && (
                 navBarOpen ? (
                     <IoMdClose
@@ -63,10 +78,15 @@ const Navbar = () => {
                 )
             )}
 
+            {/*  Contenedor de enlaces*/}
             {(navBarOpen || windowDimension.width > 800) && (
                 <ul className={styles.linksContainer}>
+
+                    {/*  Mapeo enlaces*/}
                     {links.map((x) => (
                         <li key={x.id} style={{ listStyle: "none" }}>
+
+                            {/*  Mapeo para InProgress / Toast*/}
                             {x.link === "InProgress" ? (
                                 <button
                                     onClick={() => {
@@ -106,7 +126,7 @@ const Navbar = () => {
                         </li>
                     ))}
 
-                    {/* 🔥 Botón dinámico Log In / Log Out */}
+                    {/* Botón dinámico LogIn/Out */}
                     {!auth ? (
                         <RouterLink
                             to="/login"

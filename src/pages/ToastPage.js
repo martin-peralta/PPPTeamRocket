@@ -1,5 +1,8 @@
+
+
+
+/*  Librerias y componentes    */
 import React from "react"
-// npm install react-router-dom
 
 function ToastPage() {
   const handleClick = () => {
@@ -9,7 +12,7 @@ function ToastPage() {
   return (
     <div style={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
       <button onClick={handleClick}>
-        Mostrar Alerta
+        Show alert
       </button>
     </div>
   )

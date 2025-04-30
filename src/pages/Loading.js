@@ -1,3 +1,7 @@
+
+
+
+/*  Librerias y componentes    */
 import React, { useState, useEffect } from 'react';
 import './Loading.css';  // Importa los estilos
 

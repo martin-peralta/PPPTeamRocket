@@ -1,10 +1,14 @@
+
+
+
+/*  Librerias y componentes    */
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom'; // 🔥 Importamos RouterLink
-import { useAuth } from '../context/AuthContext'; // 🔥 Importamos el contexto
+import { Link as RouterLink } from 'react-router-dom'; // Importamos RouterLink
+import { useAuth } from '../context/AuthContext'; // Importamos el contexto
 import styles from "./Home.module.css";
 
 const Home = () => {
-  const { auth } = useAuth(); // 🔥 Obtenemos auth para saber si está logueado
+  const { auth } = useAuth(); // Obtenemos auth para saber si está logueado
 
   return (
     <div className={styles.home}>
@@ -17,14 +21,14 @@ const Home = () => {
 
       <div>
         <RouterLink
-          to={auth ? "/account" : "/register"} // 🔥 Si logueado -> account, si no -> register
+          to={auth ? "/account" : "/register"} // Si logueado -> account, si no -> register
           className={styles.callToAction}
         >
           Join Us
         </RouterLink>
 
         <RouterLink
-          to="/cards" // 🔥 Siempre a /cards
+          to="/cards" // Siempre a /cards
           className={styles.callToAction}
         >
           See Cards

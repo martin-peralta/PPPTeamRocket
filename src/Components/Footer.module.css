@@ -1,3 +1,7 @@
+
+
+
+/*  Externo  */
 .Footer {
     width: 100%;
     background-color: #1f1f1f;
@@ -8,6 +12,8 @@
     align-items: center;
   }
   
+
+/*  Interno  */
 .footerContent {
     max-width: 1200px;
     width: 90%;
@@ -24,17 +30,20 @@
     object-fit: contain;
   }
   
+/*  Letra en el footer  */
 .footerContent p {
     font-size: 1rem;
     line-height: 1.5;
     margin: 0;
   }
   
+/*  Letra Footer "titulos"  */
 .footerContent b {
     color: #ffffff;
     font-weight: 600;
   }
   
+/*  Cambio reactive  */
 
 @media (max-width: 800px) {
     .footerContent {

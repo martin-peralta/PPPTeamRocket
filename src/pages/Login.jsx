@@ -1,7 +1,14 @@
+
+
+
+/*  Librerias y componentes    */
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './Login.module.css';
 import { useAuth } from '../context/AuthContext';
+
+
+
 
 function Login() {
     const [form, setForm] = useState({ email: '', password: '' });
@@ -16,6 +23,8 @@ function Login() {
         }
     };
 
+
+
     const validateForm = () => {
         const newErrors = {};
         if (!form.email) newErrors.email = 'Email is required';
@@ -24,6 +33,8 @@ function Login() {
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -51,6 +62,9 @@ function Login() {
         }
     };
 
+
+
+    
     return (
         <div className={styles.loginContainer}>
             <h2 className={styles.title}>Access to your collection</h2>

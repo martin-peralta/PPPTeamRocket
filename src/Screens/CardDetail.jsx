@@ -57,7 +57,7 @@ function CardDetail() {
       <div className={styles.details}>
         <p><strong>Rarity:</strong> {card.rarity || 'Unknown'}</p>
         <p><strong>Type:</strong> {card.types ? card.types.join(', ') : 'Unknown'}</p>
-        <p><strong>HP:</strong> {card.hp || 'Unknown'}</p>
+        <p><strong>PS:</strong> {card.hp || 'Unknown'}</p>
       </div>
 
       <button onClick={handleGoBack} className={styles.backButton}>

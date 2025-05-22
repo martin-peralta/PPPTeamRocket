@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './SearchCards.module.css';
-import Loading from '../pages/Loading'; // 👈 Pantalla de carga
+import Loading from '../pages/Loading'; 
+import CardFilters from '../Components/CardFilters'; 
 
 function SearchCards() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -10,6 +11,11 @@ function SearchCards() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [searchExecuted, setSearchExecuted] = useState(false);
+
+  // Nuevos estados para filtros
+  const [selectedRarity, setSelectedRarity] = useState('');
+  const [selectedType, setSelectedType] = useState('');
+  const [maxHP, setMaxHP] = useState('');
 
   useEffect(() => {
     const storedSearchTerm = localStorage.getItem('searchTerm');
@@ -55,6 +61,7 @@ function SearchCards() {
     <div className={styles.searchContainer}>
       <h2 className={styles.title}>Search for a Pokémon Card</h2>
 
+      {/* Formulario de búsqueda */}
       <form onSubmit={handleSearch} className={styles.form}>
         <input
           type="text"
@@ -66,25 +73,44 @@ function SearchCards() {
         <button type="submit" className={styles.button}>Search</button>
       </form>
 
+      {/* Filtros */}
+      <CardFilters
+        selectedRarity={selectedRarity}
+        setSelectedRarity={setSelectedRarity}
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
+        maxHP={maxHP}
+        setMaxHP={setMaxHP}
+      />
+
+      {/* Pantalla de carga */}
       {loading && <Loading />}
       {error && <p className={styles.error}>{error}</p>}
 
+      {/* Resultados */}
       <div className={styles.cardsGrid}>
         {searchExecuted && (
           Array.isArray(cards) && cards.length > 0 ? (
-            cards.map(card => (
-              <Link
-                key={card.id}
-                to={`/cards/${card.id}`}
-                className={styles.cardLink}
-              >
-                <div className={styles.card}>
-                  <img src={card.images.small} alt={card.name} className={styles.cardImage} />
-                  <p className={styles.cardName}>{card.name}</p>
-                  <p className={styles.cardRarity}>{card.rarity || 'No rarity available'}</p>
-                </div>
-              </Link>
-            ))
+            cards
+              .filter(card => {
+                const matchesRarity = selectedRarity ? card.rarity === selectedRarity : true;
+                const matchesType = selectedType ? card.types?.includes(selectedType) : true;
+                const matchesHP = maxHP ? parseInt(card.hp) <= parseInt(maxHP) : true;
+                return matchesRarity && matchesType && matchesHP;
+              })
+              .map(card => (
+                <Link
+                  key={card.id}
+                  to={`/cards/${card.id}`}
+                  className={styles.cardLink}
+                >
+                  <div className={styles.card}>
+                    <img src={card.images.small} alt={card.name} className={styles.cardImage} />
+                    <p className={styles.cardName}>{card.name}</p>
+                    <p className={styles.cardRarity}>{card.rarity || 'No rarity available'}</p>
+                  </div>
+                </Link>
+              ))
           ) : (
             !loading && !error && (
               <p className={styles.noResults}>No cards found for "{searchTerm}".</p>

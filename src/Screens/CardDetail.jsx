@@ -1,15 +1,13 @@
-
-
-
-/*  Librerias y componentes    */
+/*  Librerías y componentes    */
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom'; // 🔥 importamos useLocation
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import styles from './CardDetail.module.css';
+import Loading from '../pages/Loading'; // 👈 Importamos la pantalla de carga
 
 function CardDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation(); // obtenemos la info del estado si la hay
+  const location = useLocation();
 
   const [card, setCard] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,8 +29,9 @@ function CardDetail() {
     fetchCard();
   }, [id]);
 
+  // 👇 Mostrar Loading si la data aún no está lista
   if (loading) {
-    return <p className={styles.loading}>Loading card details...</p>;
+    return <Loading />;
   }
 
   if (error) {
@@ -45,9 +44,9 @@ function CardDetail() {
 
   const handleGoBack = () => {
     if (location.state && location.state.searchTerm) {
-      navigate(-1); // Si hay un estado de busqueda, vuelve atras atrás
+      navigate(-1);
     } else {
-      navigate('/cards'); // Si no hay estado, vamos manualmente a la búsqueda
+      navigate('/cards');
     }
   };
 
@@ -61,7 +60,6 @@ function CardDetail() {
         <p><strong>HP:</strong> {card.hp || 'Unknown'}</p>
       </div>
 
-      {/* Boton go back */}
       <button onClick={handleGoBack} className={styles.backButton}>
         Go Back
       </button>

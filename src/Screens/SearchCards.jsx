@@ -1,10 +1,8 @@
-
-
-
-/*  Librerias y componentes    */
+/*  Librerías y componentes    */
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Importamos Link
-import styles from './SearchCards.module.css'; // Your CSS module
+import { Link } from 'react-router-dom';
+import styles from './SearchCards.module.css';
+import Loading from '../pages/Loading'; // 👈 Pantalla de carga
 
 function SearchCards() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,7 +11,6 @@ function SearchCards() {
   const [error, setError] = useState('');
   const [searchExecuted, setSearchExecuted] = useState(false);
 
-  // Recuperar búsqueda anterior si existe
   useEffect(() => {
     const storedSearchTerm = localStorage.getItem('searchTerm');
     const storedCards = localStorage.getItem('cards');
@@ -43,7 +40,6 @@ function SearchCards() {
       const data = await response.json();
       setCards(data);
 
-      // Guardar en localStorage
       localStorage.setItem('searchTerm', searchTerm);
       localStorage.setItem('cards', JSON.stringify(data));
     } catch (error) {
@@ -70,7 +66,7 @@ function SearchCards() {
         <button type="submit" className={styles.button}>Search</button>
       </form>
 
-      {loading && <p className={styles.loading}>Searching...</p>}
+      {loading && <Loading />}
       {error && <p className={styles.error}>{error}</p>}
 
       <div className={styles.cardsGrid}>
@@ -79,7 +75,7 @@ function SearchCards() {
             cards.map(card => (
               <Link
                 key={card.id}
-                to={`/cards/${card.id}`} // Link dinámico al detalle
+                to={`/cards/${card.id}`}
                 className={styles.cardLink}
               >
                 <div className={styles.card}>

@@ -16,7 +16,7 @@ export async function searchCardsByName(name) {
   try {
     const response = await apiClient.get('/', {
       params: {
-        q: `name:${name}`,
+        q: `name:*${name}*`, 
       },
     });
     return response.data.data;

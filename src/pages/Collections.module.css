@@ -1,0 +1,66 @@
+.container {
+  padding: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.uploadSection {
+  margin-bottom: 1rem;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 10px;
+  background: #f9f9f9;
+}
+
+.cardImage {
+  width: 100%;
+  height: auto;
+}
+
+.cardButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.removeButton {
+  background: red;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+}
+
+.favoriteButton {
+  background: gold;
+  border: none;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+}
+
+.favoritePreview {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 2px dashed #ccc;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.favoriteImage {
+  width: 150px;
+  height: auto;
+}

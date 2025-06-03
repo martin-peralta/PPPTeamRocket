@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import CardSearch from '../Components/CardSearch'; // ✅ Ajusta esta ruta si tu estructura de carpetas es distinta
+
 export default function Decks() {
   const [decks, setDecks] = useState([]);
   const [currentDeck, setCurrentDeck] = useState([]);

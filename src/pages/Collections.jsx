@@ -78,7 +78,7 @@ const Collections = () => {
       <div className={styles.uploadSection}>
         <label className={styles.uploadLabel}>
           Upload Image:
-          <input type="file" accept="image/jpeg,image/png" onChange={handleImageUpload} />
+          <input type="file" accept="image/jpeg,image/png" onChange={handleImageUpload} id="uploadInput" />
         </label>
       </div>
 

@@ -47,7 +47,7 @@
   
   .select,
   .input {
-    width: 100%; /* Asegura que todo se alinee bien */
+    width: 100%;
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 5px;
@@ -85,7 +85,7 @@
   padding: 1rem;
   border-radius: 8px;
   width: 100%;
-  max-width: 300px; /* ajusta si quieres más ancho */
+  max-width: 300px; 
   box-sizing: border-box;
 }
 

@@ -118,7 +118,7 @@ function Register() {
                 </div>
 
                 <button type="submit" className={styles.button}>
-                    🚀 ¡Sing up!
+                    🚀 Sign up!
                 </button>
             </form>
 

@@ -36,5 +36,5 @@ router.get('/type/:type', async (req, res) => {
   }
 });
 
-// 🔥 ESTO es lo importante
+
 export default router;

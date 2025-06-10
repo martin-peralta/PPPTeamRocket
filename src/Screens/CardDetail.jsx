@@ -23,13 +23,12 @@ function CardDetail() {
         const data = await response.json();
         setCard(data);
 
-        // Verificar si ya está en el inventario
         if (auth?.user?._id) {
-          const check = await fetch(`http://localhost:5000/api/cards/check/${auth.user._id}/${data.id}`);
+          const check = await fetch(
+            `http://localhost:5000/api/cards/check/${auth.user._id}/${data.id}`
+          );
           const res = await check.json();
-          if (res.exists) {
-            setAlreadyInInventory(true);
-          }
+          if (res.exists) setAlreadyInInventory(true);
         }
       } catch (error) {
         setError('Error while fetching card details.');
@@ -42,7 +41,7 @@ function CardDetail() {
   }, [id, auth]);
 
   const handleGoBack = () => {
-    if (location.state && location.state.searchTerm) {
+    if (location.state?.searchTerm) {
       navigate(-1);
     } else {
       navigate('/cards');
@@ -61,7 +60,13 @@ function CardDetail() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId: auth.user._id,
-          cardId: card.id
+          card: {
+            cardId: card.id, // 🔁 Clave actualizada
+            name: card.name,
+            types: card.types || [],
+            rarity: card.rarity || 'Unknown',
+            setName: card.set?.name || 'Unknown'
+          }
         })
       });
 
@@ -91,6 +96,7 @@ function CardDetail() {
         <p><strong>Rarity:</strong> {card.rarity || 'Unknown'}</p>
         <p><strong>Type:</strong> {card.types ? card.types.join(', ') : 'Unknown'}</p>
         <p><strong>PS:</strong> {card.hp || 'Unknown'}</p>
+        <p><strong>Set:</strong> {card.set?.name || 'Unknown'}</p>
       </div>
 
       <div className={styles.buttonsContainer}>

@@ -1,14 +1,9 @@
-
-
-
 /*  Librerias y componentes    */
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './Login.module.css';
 import { useAuth } from '../context/AuthContext';
-
-
-
+import { toast } from 'react-toastify';
 
 function Login() {
     const [form, setForm] = useState({ email: '', password: '' });
@@ -23,8 +18,6 @@ function Login() {
         }
     };
 
-
-
     const validateForm = () => {
         const newErrors = {};
         if (!form.email) newErrors.email = 'Email is required';
@@ -33,8 +26,6 @@ function Login() {
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
-
-
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -50,21 +41,22 @@ function Login() {
             const data = await response.json();
 
             if (response.ok && data.token && data.user) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+
                 login({ user: data.user, token: data.token });
-                alert(`¡Welcome Back ${data.user.name}! 🚀`);
+
+                toast.success(`Welcome back, ${data.user.name}! 🚀`);
                 navigate('/');
             } else {
-                alert(data.message || 'Invalid credentials');
+                toast.error(data.message || 'Invalid credentials');
             }
         } catch (error) {
             console.error('Login error:', error);
-            alert('¡Error connecting!');
+            toast.error('Error connecting to server');
         }
     };
 
-
-
-    
     return (
         <div className={styles.loginContainer}>
             <h2 className={styles.title}>Access to your collection</h2>

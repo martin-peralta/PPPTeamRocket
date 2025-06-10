@@ -49,9 +49,10 @@ router.post('/login', async (req, res) => {
             { expiresIn: '7d' }
         );
 
+        
         res.status(200).json({
             message: 'Inicio de sesión exitoso',
-            user: { id: user._id, name: user.name, email: user.email },
+            user: { _id: user._id, name: user.name, email: user.email },
             token
         });
     } catch (error) {

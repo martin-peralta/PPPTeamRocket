@@ -1,5 +1,5 @@
 
-
+import CollectionView from './Components/CollectionView';
 
 /*  Librerias y componentes    */
 import { Routes, Route } from 'react-router-dom';
@@ -38,6 +38,7 @@ function App() {
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<Register />} /> 
         <Route path="/loadingscreen" element={<Loading />} />
+        <Route path="/collection" element={<CollectionView />} />
       </Routes>
       <Footer />
     </div>

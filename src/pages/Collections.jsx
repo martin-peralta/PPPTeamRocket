@@ -1,126 +1,171 @@
 import React, { useState, useEffect } from 'react';
-import CardSearch from '../Components/CardSearch';
-import styles from './Collections.module.css';
+import './Collections.css';
 
-// Simula una detección de carta desde imagen (reemplazar por API real)
-const uploadImageAndDetectCard = async (file) => {
-  const formData = new FormData();
-  formData.append("image", file);
+const GOOGLE_VISION_API_KEY = process.env.REACT_APP_GOOGLE_VISION_KEY;
 
-  try {
-    const response = await fetch("http://localhost:5000/api/pokemon/detect", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!response.ok) throw new Error("Error en la detección de carta");
-
-    const detectedCard = await response.json(); // Asegúrate que devuelve { id, name, imageUrl }
-    return detectedCard;
-  } catch (error) {
-    console.error("Error al detectar carta:", error);
-    alert("No se pudo detectar la carta desde la imagen.");
-    return null;
-  }
-};
-
-const Collections = () => {
-  const [collection, setCollection] = useState([]);
-  const [favorite, setFavorite] = useState(null);
-
-  // Cargar datos desde localStorage
-  useEffect(() => {
-    const stored = localStorage.getItem('collection');
-    const storedFav = localStorage.getItem('favoriteCard');
-    if (stored) setCollection(JSON.parse(stored));
-    if (storedFav) setFavorite(JSON.parse(storedFav));
-  }, []);
-
-  // Guardar en localStorage cada vez que se actualiza
-  useEffect(() => {
-    localStorage.setItem('collection', JSON.stringify(collection));
-  }, [collection]);
+function Collections() {
+  const [cardName, setCardName] = useState('');
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [cardsFound, setCardsFound] = useState(() => {
+    const stored = localStorage.getItem('savedCards');
+    return stored ? JSON.parse(stored) : [];
+  });
 
   useEffect(() => {
-    if (favorite) localStorage.setItem('favoriteCard', JSON.stringify(favorite));
-  }, [favorite]);
+    localStorage.setItem('savedCards', JSON.stringify(cardsFound));
+  }, [cardsFound]);
 
-  const handleAddCard = (card) => {
-    // Evita duplicados
-    if (!collection.find(c => c.id === card.id)) {
-      setCollection(prev => [...prev, card]);
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploadedImage(file);
+    handleScan(file);
+  };
+
+  const extractCardInfo = (text) => {
+    const nameMatch = text.match(/(?:^|\n)([A-Z][a-zñáéíóú]+(?:\s[A-Z][a-zñáéíóú]+)*)/);
+    const name = nameMatch ? nameMatch[1].trim() : '';
+
+    const hpMatch = text.match(/(?:HP|P)\s?(\d{1,4})/i);
+    const hp = hpMatch ? hpMatch[1] : '';
+
+    const lines = text.split('\n').map(line => line.trim()).filter(Boolean);
+    let firstAttack = '';
+
+    const hpIndex = lines.findIndex(line => /(?:HP|P)\s?\d{1,4}/i.test(line));
+    if (hpIndex !== -1 && hpIndex + 1 < lines.length) {
+      firstAttack = lines[hpIndex + 1];
+    }
+
+    return { name, hp, firstAttack };
+  };
+
+  const handleSearch = async ({ name, hp, firstAttack, rawQuery = null }) => {
+    let query = '';
+
+    if (rawQuery && rawQuery.includes(':')) {
+      query = rawQuery; // búsqueda avanzada
+    } else {
+      if (!name) {
+        alert('Por favor ingresa el nombre de la carta o una consulta válida.');
+        return;
+      }
+      query = `name:"${name}"`;
+      if (firstAttack) query += ` AND attacks.name:"${firstAttack}"`;
+      if (hp) query += ` AND hp:${hp}`;
+    }
+
+    console.log('Consulta a la API:', query);
+
+    try {
+      const res = await fetch(`https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}`);
+      const data = await res.json();
+      if (data.data?.length > 0) {
+        setCardsFound(prev => [...prev, ...data.data.slice(0, 1)]);
+      } else {
+        alert('No se encontraron cartas con esos parámetros.');
+      }
+    } catch (err) {
+      console.error('Error al consultar la API de Pokémon:', err);
     }
   };
 
-  const handleImageUpload = async (event) => {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const card = await uploadImageAndDetectCard(file);
-  if (card) {
-    handleAddCard(card);
-  }
+  const handleDeleteCard = (id) => {
+    setCardsFound(prev => prev.filter(card => card.id !== id));
   };
 
-  const handleRemoveCard = (id) => {
-    setCollection(prev => prev.filter(card => card.id !== id));
-    if (favorite?.id === id) setFavorite(null);
-  };
+  const handleScan = async (imageFile) => {
+    const file = imageFile || uploadedImage;
+    if (!file) return alert('Por favor sube una imagen primero.');
 
-  const handleSetFavorite = (card) => {
-    setFavorite(card);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = async () => {
+      try {
+        const base64 = reader.result.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+        const body = {
+          requests: [
+            {
+              image: { content: base64 },
+              features: [{ type: 'TEXT_DETECTION' }]
+            }
+          ]
+        };
+
+        const response = await fetch(
+          `https://vision.googleapis.com/v1/images:annotate?key=${GOOGLE_VISION_API_KEY}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          }
+        );
+        const data = await response.json();
+        const text = data.responses[0]?.fullTextAnnotation?.text;
+        if (!text) return alert('No se pudo extraer texto de la imagen.');
+
+        console.log('Texto OCR de Vision:', text);
+        const { name, hp, firstAttack } = extractCardInfo(text);
+        console.log('Nombre:', name);
+        console.log('HP:', hp);
+        console.log('Primer ataque:', firstAttack);
+
+        setCardName(name);
+        await handleSearch({ name, hp, firstAttack });
+      } catch (error) {
+        console.error('Error usando Google Vision:', error);
+        alert('Error procesando la imagen.');
+      }
+    };
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>My Collection</h2>
+    <div className="collections-container">
+      <h1 className="title">My Collection</h1>
+      <div className="collections-layout">
+        <div className="left-panel">
+          <section className="search-section">
+            <h2>Search Cards</h2>
+            <input
+              type="text"
+              placeholder='Ej: name:"Lucario" AND number:79'
+              value={cardName}
+              onChange={(e) => setCardName(e.target.value)}
+            />
+            <button onClick={() => handleSearch({ rawQuery: cardName })}>Search</button>
+          </section>
 
-      <div className={styles.uploadSection}>
-        <label className={styles.uploadLabel}>
-          Upload Image:
-          <input type="file" accept="image/jpeg,image/png" onChange={handleImageUpload} id="uploadInput" />
-        </label>
-      </div>
-
-      <CardSearch onAddCard={handleAddCard} />
-
-      <div>
-        <label htmlFor="fileInput" style={{ display: "block", marginTop: "1rem" }}>
-          O sube una imagen de carta (.jpg):
-        </label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          id="fileInput"
-        />
-      </div>
-
-      <h3 className={styles.subtitle}>Your Cards:</h3>
-      <div className={styles.cardsGrid}>
-        {collection.map(card => (
-          <div key={card.id} className={styles.card}>
-            <img src={card.imageUrl || card.images?.small} alt={card.name} className={styles.cardImage} />
-            <p>{card.name}</p>
-            <div className={styles.cardButtons}>
-              <button onClick={() => handleRemoveCard(card.id)} className={styles.removeButton}>Remove</button>
-              <button onClick={() => handleSetFavorite(card)} className={styles.favoriteButton}>
-                {favorite?.id === card.id ? "★ Favorite" : "☆ Set Favorite"}
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {favorite && (
-        <div className={styles.favoritePreview}>
-          <h4>Favorite Preview:</h4>
-          <img src={favorite.imageUrl || favorite.images?.small} alt={favorite.name} className={styles.favoriteImage} />
-          <p>{favorite.name}</p>
+          <section className="upload-section">
+            <h2>Scan Card</h2>
+            <label className="scan-button">
+              Upload and Scan
+              <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
+            </label>
+          </section>
         </div>
-      )}
+
+        <div className="right-panel">
+          <h2>Your Cards:</h2>
+          <div className="card-grid">
+            {cardsFound.length > 0 ? (
+              cardsFound.map(card => (
+                <div key={card.id} className="card-item">
+                  <img src={card.images.small} alt={card.name} />
+                  <p>{card.name}</p>
+                  <small>{card.supertype}</small>
+                  <button className="delete-button" onClick={() => handleDeleteCard(card.id)}>
+                    🗑 Eliminar
+                  </button>
+                </div>
+              ))
+            ) : (
+              <p style={{ color: 'white' }}>No cards found.</p>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default Collections;

@@ -11,7 +11,7 @@ const CollectionView = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Función para obtener imagen desde la API de Pokémon TCG
+  // Obtener imagen de carta desde API
   const getCardImage = async (cardId) => {
     try {
       const response = await axios.get(`https://api.pokemontcg.io/v2/cards/${cardId}`, {
@@ -26,7 +26,7 @@ const CollectionView = () => {
     }
   };
 
-  // Cargar colección y obtener imágenes
+  // Obtener colección con imágenes
   useEffect(() => {
     const fetchCollection = async () => {
       if (!auth?.user?._id) return;
@@ -39,7 +39,7 @@ const CollectionView = () => {
         if (response.ok) {
           const cardsWithImages = await Promise.all(
             (data.cards || []).map(async (card) => {
-              const image = await getCardImage(card.id);
+              const image = await getCardImage(card.cardId);
               return { ...card, image };
             })
           );
@@ -74,7 +74,7 @@ const CollectionView = () => {
 
       if (response.ok) {
         toast.success('Card removed from collection!');
-        setCollection(prev => prev.filter(card => card.id !== cardId));
+        setCollection(prev => prev.filter(card => card.cardId !== cardId));
       } else {
         toast.error('Failed to remove card.');
       }
@@ -123,7 +123,7 @@ const CollectionView = () => {
                 <h3 className={styles.cardName}>{card.name}</h3>
                 {viewMode === 'list' && (
                   <>
-                    <p><strong>ID:</strong> {card.id}</p>
+                    <p><strong>ID:</strong> {card.cardId}</p>
                     <p><strong>Types:</strong> {card.types?.join(', ') || 'Unknown'}</p>
                     <p><strong>Rarity:</strong> {card.rarity}</p>
                     <p><strong>Set:</strong> {card.setName}</p>
@@ -133,7 +133,7 @@ const CollectionView = () => {
 
               <button
                 className={styles.removeButton}
-                onClick={() => handleRemoveCard(card.id)}
+                onClick={() => handleRemoveCard(card.cardId)}
               >
                 Remove
               </button>

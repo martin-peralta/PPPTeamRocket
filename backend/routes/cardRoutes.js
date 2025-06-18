@@ -25,7 +25,7 @@ router.post('/add', async (req, res) => {
 
     res.status(200).json({ message: 'Carta agregada al inventario.' });
   } catch (error) {
-    console.error('🔥 Error en /add:', error);
+    console.error('Error en /add:', error);
     res.status(500).json({ message: 'Error al guardar la carta.', error });
   }
 });
@@ -58,7 +58,7 @@ router.get('/user/:userId', async (req, res) => {
 
     res.status(200).json({ cards: user.inventory });
   } catch (error) {
-    console.error('🔥 Error en GET /user/:userId:', error);
+    console.error('Error en GET /user/:userId:', error);
     res.status(500).json({ message: 'Error al obtener el inventario.', error: error.message });
   }
 });
@@ -77,7 +77,7 @@ router.delete('/remove/:userId/:cardId', async (req, res) => {
 
     res.status(200).json({ message: 'Carta eliminada del inventario.' });
   } catch (error) {
-    console.error('🔥 Error en DELETE /remove:', error);
+    console.error('Error en DELETE /remove:', error);
     res.status(500).json({ message: 'Error al eliminar la carta.', error: error.message });
   }
 });

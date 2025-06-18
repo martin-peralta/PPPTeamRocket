@@ -1,29 +1,23 @@
-
-import CollectionView from './Components/CollectionView';
-
-/*  Librerias y componentes    */
+// Librerías y componentes
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-// Pages
+// Paginas
 import Home from './Screens/Home';
 import Account from './Screens/Account';
 import SearchCards from './Screens/SearchCards';
 import CardDetail from './Screens/CardDetail';
-
-// Auth Pages
+// Login/register
 import Login from './pages/Login'; 
 import Register from './pages/Register'; 
-
-// Components
-import Footer from './Components/Footer';
-import Navbar from './Components/Navbar';
-
-// Toast
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-// Loading Screen
+// Pantalla de carga
 import Loading from './pages/Loading';
+
+// Componentes
+import Navbar from './Components/Navbar';
+import Footer from './Components/Footer';
+import CollectionView from './Components/CollectionView';
 
 function App() {
   return (
@@ -38,7 +32,7 @@ function App() {
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<Register />} /> 
         <Route path="/loadingscreen" element={<Loading />} />
-        <Route path="/collection" element={<CollectionView />} />
+        <Route path="/collections" element={<CollectionView />} /> 
       </Routes>
       <Footer />
     </div>

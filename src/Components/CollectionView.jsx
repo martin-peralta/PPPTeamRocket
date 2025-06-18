@@ -11,7 +11,22 @@ const CollectionView = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Fetch user's collection
+  // Función para obtener imagen desde la API de Pokémon TCG
+  const getCardImage = async (cardId) => {
+    try {
+      const response = await axios.get(`https://api.pokemontcg.io/v2/cards/${cardId}`, {
+        headers: {
+          'X-Api-Key': process.env.REACT_APP_POKEMON_API_KEY
+        }
+      });
+      return response.data.data.images.small;
+    } catch (error) {
+      console.error(`Error fetching image for card ${cardId}:`, error);
+      return 'https://via.placeholder.com/200';
+    }
+  };
+
+  // Cargar colección y obtener imágenes
   useEffect(() => {
     const fetchCollection = async () => {
       if (!auth?.user?._id) return;
@@ -22,7 +37,13 @@ const CollectionView = () => {
         const data = await response.json();
 
         if (response.ok) {
-          setCollection(data.cards || []);
+          const cardsWithImages = await Promise.all(
+            (data.cards || []).map(async (card) => {
+              const image = await getCardImage(card.id);
+              return { ...card, image };
+            })
+          );
+          setCollection(cardsWithImages);
           setError('');
         } else {
           setError(data.message || 'Error loading collection');
@@ -38,22 +59,7 @@ const CollectionView = () => {
     fetchCollection();
   }, [auth?.user?._id]);
 
-  // Fetch card image for each card
-  const getCardImage = async (cardId) => {
-    try {
-      const response = await axios.get(`https://api.pokemontcg.io/v2/cards/${cardId}`, {
-        headers: {
-          'X-Api-Key': process.env.REACT_APP_POKEMON_API_KEY
-        }
-      });
-      return response.data.data.images.small;
-    } catch (error) {
-      console.error('Error fetching card image:', error);
-      return null;
-    }
-  };
-
-  // Handle card removal
+  // Eliminar carta
   const handleRemoveCard = async (cardId) => {
     if (!auth?.user?._id) {
       toast.warning('You must be logged in to remove cards.');
@@ -68,7 +74,7 @@ const CollectionView = () => {
 
       if (response.ok) {
         toast.success('Card removed from collection!');
-        setCollection(prev => prev.filter(card => card.cardId !== cardId));
+        setCollection(prev => prev.filter(card => card.id !== cardId));
       } else {
         toast.error('Failed to remove card.');
       }
@@ -106,43 +112,28 @@ const CollectionView = () => {
         <div className={`${styles.collection} ${viewMode === 'grid' ? styles.grid : styles.list}`}>
           {collection.map((card, index) => (
             <div key={index} className={`${styles.card} ${viewMode === 'grid' ? styles.gridCard : styles.listCard}`}>
-              {viewMode === 'grid' ? (
-                <>
-                  <img
-                    src={card.image || 'https://via.placeholder.com/200'}
-                    alt={card.name}
-                    className={styles.cardImage}
-                    onError={(e) => {
-                      e.target.src = 'https://via.placeholder.com/200';
-                    }}
-                  />
-                  <div className={styles.cardInfo}>
-                    <h3 className={styles.cardName}>{card.name}</h3>
-                    <p className={styles.cardRarity}>{card.rarity}</p>
-                  </div>
-                </>
-              ) : (
-                <div className={styles.cardDetails}>
-                  <img
-                    src={card.image || 'https://via.placeholder.com/200'}
-                    alt={card.name}
-                    className={styles.cardImage}
-                    onError={(e) => {
-                      e.target.src = 'https://via.placeholder.com/200';
-                    }}
-                  />
-                  <div className={styles.cardInfo}>
-                    <h3 className={styles.cardName}>{card.name}</h3>
-                    <p><strong>ID:</strong> {card.cardId}</p>
-                    <p><strong>Types:</strong> {card.types.join(', ')}</p>
+              <img
+                src={card.image}
+                alt={card.name}
+                className={styles.cardImage}
+                onError={(e) => { e.target.src = 'https://via.placeholder.com/200'; }}
+              />
+
+              <div className={styles.cardInfo}>
+                <h3 className={styles.cardName}>{card.name}</h3>
+                {viewMode === 'list' && (
+                  <>
+                    <p><strong>ID:</strong> {card.id}</p>
+                    <p><strong>Types:</strong> {card.types?.join(', ') || 'Unknown'}</p>
                     <p><strong>Rarity:</strong> {card.rarity}</p>
                     <p><strong>Set:</strong> {card.setName}</p>
-                  </div>
-                </div>
-              )}
+                  </>
+                )}
+              </div>
+
               <button
                 className={styles.removeButton}
-                onClick={() => handleRemoveCard(card.cardId)}
+                onClick={() => handleRemoveCard(card.id)}
               >
                 Remove
               </button>

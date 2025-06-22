@@ -1,6 +1,3 @@
-
-
-
 /*  Librerias y componentes    */
 import React, { useEffect, useState } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
@@ -44,7 +41,9 @@ const Navbar = () => {
         { id: 1, link: "Home", to: "/", type: "route" },
         { id: 2, link: "Account", to: "/account", type: "route" }, 
         { id: 3, link: "Cards", to: "/cards", type: "route" },
-        { id: 4, link: "InProgress", to: "inprogress", type: "scroll" },
+        { id: 4, link: "Decks", to: "/decks", type: "route" },             // ✅ Nuevo
+        { id: 5, link: "Collections", to: "/collections", type: "route" }, // ✅ Nuevo
+        { id: 6, link: "InProgress", to: "inprogress", type: "scroll" },
     ];
 
 

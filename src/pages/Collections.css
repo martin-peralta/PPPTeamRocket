@@ -1,0 +1,138 @@
+/* Estilo base del contenedor */
+.collections-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: white;
+}
+
+/* Layout en dos columnas */
+.collections-layout {
+  display: flex;
+  gap: 40px;
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+  background-color: rgba(255, 80, 80, 0.10);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  min-width: 280px;
+}
+
+.right-panel {
+  flex: 3;
+  padding: 20px;
+  background-color: rgba(255, 80, 80, 0.10);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-section h2,
+.upload-section h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.search-section input {
+  width: calc(100% - 20px);
+  padding: 8px 12px;
+  margin: 0 auto 10px auto;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  display: block;
+  color-scheme: light;
+}
+
+.search-section button,
+.scan-button {
+  padding: 10px 20px;
+  background: linear-gradient(145deg, #ff4747, #ff1c1c);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin: 10px auto 0 auto;
+  display: block;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.scan-button:hover {
+  background: linear-gradient(145deg, #ff6a6a, #ff3b3b);
+}
+
+.right-panel h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.card-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.card-item:hover {
+  transform: translateY(-4px);
+}
+
+.card-item img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.card-item p {
+  font-weight: bold;
+  margin: 8px 0 4px 0;
+}
+
+.card-item small {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: #ccc;
+}
+
+/* Nuevo botón de eliminar */
+.card-item button {
+  background: #ff4d4d;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 13px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.card-item button:hover {
+  background: #ff1f1f;
+  transform: scale(1.05);
+}

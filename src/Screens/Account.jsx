@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import styles from './Account.module.css';
-import Loading from '../pages/Loading'; // 👈 Pantalla de carga
+import Loading from '../pages/Loading'; // Pantalla de carga
 
 const AccountPage = () => {
   const { auth } = useAuth();

@@ -9,6 +9,8 @@ import Home from './Screens/Home';
 import Account from './Screens/Account';
 import SearchCards from './Screens/SearchCards';
 import CardDetail from './Screens/CardDetail';
+import Collections from './pages/Collections';
+import Decks from './pages/Decks';
 
 // Auth Pages
 import Login from './pages/Login'; 
@@ -38,6 +40,8 @@ function App() {
         <Route path="/login" element={<Login />} /> 
         <Route path="/register" element={<Register />} /> 
         <Route path="/loadingscreen" element={<Loading />} />
+        <Route path="/collections" element={<Collections />} />
+        <Route path="/decks" element={<Decks />} />
       </Routes>
       <Footer />
     </div>

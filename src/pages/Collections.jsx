@@ -44,10 +44,10 @@ function Collections() {
     let query = '';
 
     if (rawQuery && rawQuery.includes(':')) {
-      query = rawQuery; // búsqueda avanzada
+      query = rawQuery;
     } else {
       if (!name) {
-        alert('Por favor ingresa el nombre de la carta o una consulta válida.');
+        alert('Please enter the card name or a valid query.');
         return;
       }
       query = `name:"${name}"`;
@@ -55,28 +55,33 @@ function Collections() {
       if (hp) query += ` AND hp:${hp}`;
     }
 
-    console.log('Consulta a la API:', query);
+    console.log('API query:', query);
 
     try {
       const res = await fetch(`https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}`);
       const data = await res.json();
       if (data.data?.length > 0) {
-        setCardsFound(prev => [...prev, ...data.data.slice(0, 1)]);
+        setCardsFound(prev => [...prev, data.data[0]]);
       } else {
-        alert('No se encontraron cartas con esos parámetros.');
+        alert('No cards found with those parameters.');
       }
     } catch (err) {
-      console.error('Error al consultar la API de Pokémon:', err);
+      console.error('Error querying the Pokémon API:', err);
     }
   };
 
   const handleDeleteCard = (id) => {
-    setCardsFound(prev => prev.filter(card => card.id !== id));
+    const index = cardsFound.findIndex((card) => card.id === id);
+    if (index !== -1) {
+      const updated = [...cardsFound];
+      updated.splice(index, 1);
+      setCardsFound(updated);
+    }
   };
 
   const handleScan = async (imageFile) => {
     const file = imageFile || uploadedImage;
-    if (!file) return alert('Por favor sube una imagen primero.');
+    if (!file) return alert('Please upload an image first.');
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -102,19 +107,19 @@ function Collections() {
         );
         const data = await response.json();
         const text = data.responses[0]?.fullTextAnnotation?.text;
-        if (!text) return alert('No se pudo extraer texto de la imagen.');
+        if (!text) return alert('Could not extract text from image.');
 
-        console.log('Texto OCR de Vision:', text);
+        console.log('OCR Text from Vision:', text);
         const { name, hp, firstAttack } = extractCardInfo(text);
-        console.log('Nombre:', name);
+        console.log('Name:', name);
         console.log('HP:', hp);
-        console.log('Primer ataque:', firstAttack);
+        console.log('First Attack:', firstAttack);
 
         setCardName(name);
         await handleSearch({ name, hp, firstAttack });
       } catch (error) {
-        console.error('Error usando Google Vision:', error);
-        alert('Error procesando la imagen.');
+        console.error('Error using Google Vision:', error);
+        alert('Error processing the image.');
       }
     };
   };
@@ -128,7 +133,7 @@ function Collections() {
             <h2>Search Cards</h2>
             <input
               type="text"
-              placeholder='Ej: name:"Lucario" AND number:79'
+              placeholder='e.g. name:"Lucario" AND number:79'
               value={cardName}
               onChange={(e) => setCardName(e.target.value)}
             />
@@ -148,13 +153,15 @@ function Collections() {
           <h2>Your Cards:</h2>
           <div className="card-grid">
             {cardsFound.length > 0 ? (
-              cardsFound.map(card => (
-                <div key={card.id} className="card-item">
+              cardsFound.map((card, index) => (
+                <div key={`${card.id}-${index}`} className="card-item">
                   <img src={card.images.small} alt={card.name} />
                   <p>{card.name}</p>
                   <small>{card.supertype}</small>
+                  <p className="card-detail">Type: {card.types?.[0] || 'N/A'}</p>
+                  <p className="card-detail">Price: ${card.cardmarket?.prices?.averageSellPrice?.toFixed(2) || 'N/A'}</p>
                   <button className="delete-button" onClick={() => handleDeleteCard(card.id)}>
-                    🗑 Eliminar
+                    🗑 Remove
                   </button>
                 </div>
               ))

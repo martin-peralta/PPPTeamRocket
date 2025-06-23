@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import styles from './CollectionView.module.css';
+import styles from './InventoryView.module.css';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-const CollectionView = () => {
+const InventoryView = () => {
   const { auth } = useAuth();
   const [collection, setCollection] = useState([]);
   const [viewMode, setViewMode] = useState('list');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Obtener imagen de carta desde API
   const getCardImage = async (cardId) => {
     try {
       const response = await axios.get(`https://api.pokemontcg.io/v2/cards/${cardId}`, {
@@ -26,7 +25,6 @@ const CollectionView = () => {
     }
   };
 
-  // Obtener colección con imágenes
   useEffect(() => {
     const fetchCollection = async () => {
       if (!auth?.user?._id) return;
@@ -59,7 +57,6 @@ const CollectionView = () => {
     fetchCollection();
   }, [auth?.user?._id]);
 
-  // Eliminar carta
   const handleRemoveCard = async (cardId) => {
     if (!auth?.user?._id) {
       toast.warning('You must be logged in to remove cards.');
@@ -87,7 +84,7 @@ const CollectionView = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>Your Collection</h1>
+        <h1>Your Inventory</h1>
         <div className={styles.viewControls}>
           <button
             className={`${styles.viewButton} ${viewMode === 'list' ? styles.active : ''}`}
@@ -105,7 +102,7 @@ const CollectionView = () => {
       </div>
 
       {loading ? (
-        <div className={styles.loading}>Loading collection...</div>
+        <div className={styles.loading}>Loading inventory...</div>
       ) : error ? (
         <div className={styles.error}>{error}</div>
       ) : (
@@ -118,7 +115,6 @@ const CollectionView = () => {
                 className={styles.cardImage}
                 onError={(e) => { e.target.src = 'https://via.placeholder.com/200'; }}
               />
-
               <div className={styles.cardInfo}>
                 <h3 className={styles.cardName}>{card.name}</h3>
                 {viewMode === 'list' && (
@@ -130,7 +126,6 @@ const CollectionView = () => {
                   </>
                 )}
               </div>
-
               <button
                 className={styles.removeButton}
                 onClick={() => handleRemoveCard(card.cardId)}
@@ -145,4 +140,4 @@ const CollectionView = () => {
   );
 };
 
-export default CollectionView;
+export default InventoryView;

@@ -1,4 +1,4 @@
-/*  Librerias y componentes    */
+/* Librerías y componentes */
 import React, { useEffect, useState } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
@@ -30,13 +30,12 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', detectDimension);
   }, [windowDimension]);
 
-  // Enlaces del navbar
+  
   const links = [
     { id: 1, link: "Home", to: "/", type: "route" },
     { id: 2, link: "Account", to: "/account", type: "route" },
     { id: 3, link: "Cards", to: "/cards", type: "route" },
-    { id: 4, link: "Collections", to: "/collections", type: "route" }, // ✅ NUEVO LINK
-    { id: 5, link: "InProgress", to: "inprogress", type: "scroll" }
+    { id: 4, link: "InProgress", to: "inprogress", type: "scroll" }
   ];
 
   const handleLogout = () => {
@@ -108,10 +107,29 @@ const Navbar = () => {
             </li>
           ))}
 
-          {!auth ? (
+          
+          <li style={{ listStyle: "none" }}> 
+            <div className={styles.dropdown}> 
+              <button className={styles.navLink}>Collections & Inventory</button>
+              <div className={styles.dropdownContent}>
+                <RouterLink to="/collections" onClick={() => setNavBarOpen(false)} className={styles.navLink}>
+                  Inventory
+                </RouterLink>
+                <RouterLink to="/collections/mycollections" onClick={() => setNavBarOpen(false)} className={styles.navLink}>
+                  My Collections
+                </RouterLink>
+                <RouterLink to="/collections/create" onClick={() => setNavBarOpen(false)} className={styles.navLink}>
+                  Create Collection
+                </RouterLink>
+              </div>
+            </div>
+          </li>
+
+          
+          {!auth ? (  // boton login/logout
             <RouterLink
               to="/login"
-              onClick={() => setNavBarOpen(false)}
+              onClick={() => setNavBarOpen(false)} 
               className={styles.loginButton}
             >
               Log In

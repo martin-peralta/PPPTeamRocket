@@ -1,8 +1,7 @@
-
-//Librerias importadas
+// Librerías importadas
 import mongoose from 'mongoose';
 
-const CardSchema = new mongoose.Schema({ // Parametros de inventario al guardar carta en seccion cards
+const CardSchema = new mongoose.Schema({  
   cardId: { type: String, required: true }, 
   name: String,
   types: [String],
@@ -10,7 +9,13 @@ const CardSchema = new mongoose.Schema({ // Parametros de inventario al guardar 
   setName: String
 });
 
-// Modelo de usuario
+
+const CollectionSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  description: { type: String, default: '' },
+  cards: [CardSchema],  
+});
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -25,7 +30,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  inventory: [CardSchema]  //Llamada a los parametros de arriba
+  inventory: [CardSchema],  
+  collections: [CollectionSchema]  
 });
 
 const User = mongoose.model('User', UserSchema);

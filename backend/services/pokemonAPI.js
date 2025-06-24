@@ -1,3 +1,4 @@
+// backend/services/pokemonAPI.js
 import axios from 'axios';
 
 const API_KEY = process.env.POKEMON_API_KEY;
@@ -16,7 +17,7 @@ export async function searchCardsByName(name) {
   try {
     const response = await apiClient.get('/', {
       params: {
-        q: `name:*${name}*`, 
+        q: `name:*${name}*`,
       },
     });
     return response.data.data;
@@ -26,11 +27,11 @@ export async function searchCardsByName(name) {
   }
 }
 
-// Buscar carta específica por ID
+// Buscar carta específica por ID (devuelve objeto completo con imágenes, set, etc.)
 export async function getCardById(id) {
   try {
     const response = await apiClient.get(`/${id}`);
-    return response.data.data;
+    return response.data.data; // 🔁 devolvemos TODO el objeto original
   } catch (error) {
     console.error('Error buscando carta por ID:', error.message);
     throw error;

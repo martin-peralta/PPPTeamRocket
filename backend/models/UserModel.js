@@ -6,9 +6,10 @@ const CardSchema = new mongoose.Schema({
   name: String,
   types: [String],
   rarity: String,
-  setName: String
+  setName: String,
+  price: Number,
+  isTradable: { type: Boolean, default: false } 
 });
-
 
 const CollectionSchema = new mongoose.Schema({
   name: { type: String, required: true },

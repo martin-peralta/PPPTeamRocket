@@ -18,14 +18,14 @@
 }
 
 .card {
-  display: block; /* necesario para que el <Link> se comporte como tarjeta */
+  display: block;
   background-color: #1e1e1e;
   padding: 1rem;
   border-radius: 10px;
   border: 1px solid #444;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  text-decoration: none; /* quitar subrayado de Link */
-  color: inherit; /* mantener el color de texto */
+  text-decoration: none;
+  color: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -79,6 +79,14 @@
   margin-bottom: 0.5rem;
   text-align: center;
 }
+
+.price {
+  color: #90ee90;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
 .buttonRow {
   display: flex;
   justify-content: center;

@@ -30,7 +30,6 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', detectDimension);
   }, [windowDimension]);
 
-  
   const links = [
     { id: 1, link: "Home", to: "/", type: "route" },
     { id: 2, link: "Account", to: "/account", type: "route" },
@@ -66,50 +65,21 @@ const Navbar = () => {
 
       {(navBarOpen || windowDimension.width > 800) && (
         <ul className={styles.linksContainer}>
-          {links.map((x) => (
+          {links.slice(0, 3).map((x) => (
             <li key={x.id} style={{ listStyle: "none" }}>
-              {x.link === "InProgress" ? (
-                <button
-                  onClick={() => {
-                    toast.info("Work in progress 🚧", {
-                      position: "top-center",
-                      autoClose: 2000,
-                    });
-                    setNavBarOpen(false);
-                  }}
-                  className={styles.navLink}
-                  style={{ background: "none", border: "none", cursor: "pointer" }}
-                >
-                  {x.link}
-                </button>
-              ) : x.type === "scroll" ? (
-                <ScrollLink
-                  activeClass="active"
-                  to={x.to}
-                  spy={true}
-                  smooth={true}
-                  offset={-70}
-                  duration={500}
-                  onClick={() => setNavBarOpen(false)}
-                  className={styles.navLink}
-                >
-                  {x.link}
-                </ScrollLink>
-              ) : (
-                <RouterLink
-                  to={x.to}
-                  onClick={() => setNavBarOpen(false)}
-                  className={styles.navLink}
-                >
-                  {x.link}
-                </RouterLink>
-              )}
+              <RouterLink
+                to={x.to}
+                onClick={() => setNavBarOpen(false)}
+                className={styles.navLink}
+              >
+                {x.link}
+              </RouterLink>
             </li>
           ))}
 
-          
-          <li style={{ listStyle: "none" }}> 
-            <div className={styles.dropdown}> 
+          {/* Mover esta sección antes de InProgress */}
+          <li style={{ listStyle: "none" }}>
+            <div className={styles.dropdown}>
               <button className={styles.navLink}>Collections & Inventory</button>
               <div className={styles.dropdownContent}>
                 <RouterLink to="/collections" onClick={() => setNavBarOpen(false)} className={styles.navLink}>
@@ -125,23 +95,44 @@ const Navbar = () => {
             </div>
           </li>
 
-          
-          {!auth ? (  // boton login/logout
-            <RouterLink
-              to="/login"
-              onClick={() => setNavBarOpen(false)} 
-              className={styles.loginButton}
-            >
-              Log In
-            </RouterLink>
-          ) : (
-            <button
-              onClick={handleLogout}
-              className={styles.loginButton}
-            >
-              Log Out ({auth.user.name})
-            </button>
-          )}
+          {/* InProgress va después */}
+          {links.slice(3).map((x) => (
+            <li key={x.id} style={{ listStyle: "none" }}>
+              <button
+                onClick={() => {
+                  toast.info("Work in progress 🚧", {
+                    position: "top-center",
+                    autoClose: 2000,
+                  });
+                  setNavBarOpen(false);
+                }}
+                className={styles.navLink}
+                style={{ background: "none", border: "none", cursor: "pointer" }}
+              >
+                {x.link}
+              </button>
+            </li>
+          ))}
+
+          {/* Botón Login/Logout */}
+          <li style={{ listStyle: "none" }}>
+            {!auth ? (
+              <RouterLink
+                to="/login"
+                onClick={() => setNavBarOpen(false)}
+                className={styles.loginButton}
+              >
+                Log In
+              </RouterLink>
+            ) : (
+              <button
+                onClick={handleLogout}
+                className={styles.loginButton}
+              >
+                Log Out ({auth.user.name})
+              </button>
+            )}
+          </li>
         </ul>
       )}
     </div>

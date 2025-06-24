@@ -1,9 +1,10 @@
 import express from 'express';
 import User from '../models/UserModel.js';
+import { getCardById } from '../services/pokemonAPI.js';
 
 const router = express.Router();
 
-// Agregar carta al inventario
+// Agregar carta al inventario con precio incluido
 router.post('/add', async (req, res) => {
   const { userId, card } = req.body;
 
@@ -17,16 +18,78 @@ router.post('/add', async (req, res) => {
 
     const exists = user.inventory.some(c => c.cardId === card.cardId);
     if (!exists) {
-      user.inventory.push(card);
+      const apiCard = await getCardById(card.cardId);
+
+      const price =
+        apiCard?.tcgplayer?.prices?.normal?.market ??
+        apiCard?.tcgplayer?.prices?.holofoil?.market ??
+        apiCard?.tcgplayer?.prices?.reverseHolofoil?.market ??
+        null;
+
+      const cardToSave = {
+        cardId: apiCard.id,
+        name: apiCard.name,
+        types: apiCard.types,
+        rarity: apiCard.rarity,
+        setName: apiCard.set?.name || 'Unknown',
+        price: price,
+        isTradable: false // 👈 NUEVO CAMPO
+      };
+
+      user.inventory.push(cardToSave);
       await user.save();
     }
 
-    res.status(200).json({ message: 'Carta agregada al inventario.' });
+    res.status(200).json({ message: 'Card added to inventory!' });
   } catch (error) {
-    console.error('Error en /add:', error);
+    console.error('Error en /add:', error.message || error);
     res.status(500).json({ message: 'Error al guardar la carta.', error });
   }
 });
+
+// NUEVA RUTA: Alternar estado de tradeo
+router.patch('/tradable/:userId/:cardId', async (req, res) => {
+  const { userId, cardId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: 'Usuario no encontrado.' });
+
+    const card = user.inventory.find(c => c.cardId === cardId);
+    if (!card) return res.status(404).json({ message: 'Carta no encontrada en inventario.' });
+
+    card.isTradable = !card.isTradable;
+    await user.save();
+
+    res.status(200).json({ message: 'Estado de tradeo actualizado.', isTradable: card.isTradable });
+  } catch (error) {
+    console.error('Error alternando estado de tradeo:', error);
+    res.status(500).json({ message: 'Error al actualizar carta.', error });
+  }
+});
+
+// Cambiar estado de tradeStatus
+router.put('/trade-status/:userId/:cardId', async (req, res) => {
+  const { userId, cardId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: 'Usuario no encontrado.' });
+
+    const card = user.inventory.find(card => card.cardId === cardId);
+    if (!card) return res.status(404).json({ message: 'Carta no encontrada en inventario.' });
+
+    card.tradeStatus = card.tradeStatus === 'available' ? 'not available' : 'available';
+
+    await user.save();
+
+    res.status(200).json({ message: 'Estado de intercambio actualizado.', newStatus: card.tradeStatus });
+  } catch (error) {
+    console.error('Error actualizando tradeStatus:', error);
+    res.status(500).json({ message: 'Error al actualizar tradeStatus.', error });
+  }
+});
+
 
 // Verificar si una carta ya está en el inventario
 router.get('/check/:userId/:cardId', async (req, res) => {
@@ -131,7 +194,22 @@ router.get('/collections/user/:userId', async (req, res) => {
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: 'Usuario no encontrado.' });
 
-    res.status(200).json({ collections: user.collections });
+    const priceMap = new Map();
+    user.inventory.forEach(card => {
+      if (card.cardId && card.price != null) {
+        priceMap.set(card.cardId, card.price);
+      }
+    });
+
+    const collectionsWithPrice = user.collections.map(col => {
+      const totalPrice = col.cards.reduce((sum, card) => {
+        return sum + (priceMap.get(card.cardId) || 0);
+      }, 0);
+
+      return { ...col.toObject(), totalPrice };
+    });
+
+    res.status(200).json({ collections: collectionsWithPrice });
   } catch (error) {
     console.error('Error en GET /collections/user/:userId:', error);
     res.status(500).json({ message: 'Error al obtener las colecciones.', error: error.message });

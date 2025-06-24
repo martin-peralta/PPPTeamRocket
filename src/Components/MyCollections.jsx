@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import styles from './MyCollections.module.css';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../pages/Loading';
 
 const MyCollections = () => {
   const { auth } = useAuth();
@@ -37,6 +38,7 @@ const MyCollections = () => {
             const images = await Promise.all(
               (col.cards || []).slice(0, 2).map(async (c) => await getCardImage(c.cardId))
             );
+
             return { ...col, previewImages: images };
           })
         );
@@ -48,7 +50,7 @@ const MyCollections = () => {
       console.error('Error loading collections:', err);
       toast.error('Error loading collections');
     } finally {
-      setLoading(false);
+      setTimeout(() => setLoading(false), 1200);
     }
   };
 
@@ -67,8 +69,8 @@ const MyCollections = () => {
 
       const data = await res.json();
       if (res.ok) {
-        toast.success('Colección eliminada.');
-        fetchCollections(); // Actualizar lista
+        toast.success('Collection deleted.');
+        fetchCollections();
       } else {
         toast.error(data.message || 'Error al eliminar.');
       }
@@ -82,12 +84,12 @@ const MyCollections = () => {
     navigate(`/collections/detail/${collectionId}`);
   };
 
+  if (loading) return <Loading />;
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>My Collections</h1>
-      {loading ? (
-        <p className={styles.loading}>Loading collections...</p>
-      ) : collections.length === 0 ? (
+      {collections.length === 0 ? (
         <p className={styles.empty}>You haven't created any collections yet.</p>
       ) : (
         <div className={styles.grid}>
@@ -96,6 +98,7 @@ const MyCollections = () => {
               <h3 className={styles.cardTitle}>{col.name || col.collectionName}</h3>
               <p className={styles.description}>{col.description || 'No description provided.'}</p>
               <p className={styles.cardCount}><strong>Cards:</strong> {col.cards.length}</p>
+              <p className={styles.price}><strong>Total Price:</strong> ${col.totalPrice?.toFixed(2) ?? '0.00'}</p>
               <div className={styles.preview}>
                 {col.previewImages.map((img, idx) => (
                   <img key={idx} src={img} alt="preview" />

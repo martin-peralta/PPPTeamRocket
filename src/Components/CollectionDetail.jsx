@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import styles from './CollectionDetail.module.css';
+import Loading from '../pages/Loading';
 
 const CollectionDetail = () => {
   const { auth } = useAuth();
@@ -30,7 +31,10 @@ const CollectionDetail = () => {
 
   const fetchCollection = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/cards/collections/detail-by-id/${auth.user._id}/${collectionId}`);
+      const userId = auth?.user?._id;
+      if (!userId || !collectionId) return;
+
+      const res = await fetch(`http://localhost:5000/api/cards/collections/detail-by-id/${userId}/${collectionId}`);
       const data = await res.json();
 
       if (res.ok && data.collection) {
@@ -49,11 +53,10 @@ const CollectionDetail = () => {
       console.error('Error:', err);
       toast.error('Error loading collection.');
     } finally {
-      setLoading(false);
+      setTimeout(() => setLoading(false), 1200);
     }
   };
 
-  // Ejecutar fetch solo cuando esté el ID del usuario cargado
   useEffect(() => {
     if (auth?.user?._id && collectionId) {
       fetchCollection();
@@ -62,13 +65,13 @@ const CollectionDetail = () => {
 
   const handleUpdateName = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/cards/collections/edit/${auth.user._id}/${collection.name}`, {
+      const userId = auth?.user?._id;
+      if (!userId || !collection?.name) return;
+
+      const res = await fetch(`http://localhost:5000/api/cards/collections/edit/${userId}/${collection.name}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          newName,
-          newDescription
-        })
+        body: JSON.stringify({ newName, newDescription })
       });
 
       const data = await res.json();
@@ -88,7 +91,10 @@ const CollectionDetail = () => {
     if (!window.confirm('Are you sure you want to delete this collection?')) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/cards/collections/${auth.user._id}/${collectionId}`, {
+      const userId = auth?.user?._id;
+      if (!userId || !collectionId) return;
+
+      const res = await fetch(`http://localhost:5000/api/cards/collections/${userId}/${collectionId}`, {
         method: 'DELETE'
       });
 
@@ -104,7 +110,7 @@ const CollectionDetail = () => {
     }
   };
 
-  if (loading) return <p className={styles.loading}>Loading collection...</p>;
+  if (loading) return <Loading />;
   if (!collection) return <p className={styles.error}>Collection not found.</p>;
 
   return (

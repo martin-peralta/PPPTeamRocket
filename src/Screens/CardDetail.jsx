@@ -61,7 +61,7 @@ function CardDetail() {
         body: JSON.stringify({
           userId: auth.user._id,
           card: {
-            cardId: card.id, // 🔁 Clave actualizada
+            cardId: card.id, 
             name: card.name,
             types: card.types || [],
             rarity: card.rarity || 'Unknown',

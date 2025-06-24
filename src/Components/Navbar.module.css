@@ -1,6 +1,3 @@
-
-
-
 /* Estilos base del Navbar */
 .navBar {
     display: flex;
@@ -15,7 +12,6 @@
     border: none;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
-
 
 /* Menú móvil abierto - Corregido */
 .navOpen {
@@ -56,12 +52,63 @@
     cursor: pointer;
     text-decoration: none;
     transition: 0.3s;
+    background: none;
+    border: none;
+
 }
 
 .navLink:hover {
     color: #ffffff;
 }
 
+/* Dropdown: Collections & Inventory */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.navLink.dropdownLink {
+    font-size: 1.2em;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px;
+}
+
+/* Sin borde ni sombra para dropdownContent */
+.dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+    border: none; /* Eliminar borde */
+    box-shadow: none; /* Eliminar sombra */
+    border-radius: 4px;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown:hover .dropdownContent {
+    display: block;
+}
+
+.dropdownContent .navLink {
+    padding: 10px;
+    color: #fff;
+    background-color: #333;
+    display: block;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.dropdownContent .navLink:hover {
+    background-color: #0056b3;
+}
+
+/* Botón dinámico LogIn/Out */
 .loginButton {
     background-color: rgb(34, 232, 166);
     color: white;
@@ -80,7 +127,7 @@
 }
 
 .loginButton:hover {
-    background-color: #00d084;;
+    background-color: #00d084;
     transform: scale(1.05);
 }
 
@@ -107,6 +154,10 @@
     .navLink:hover {
         font-size: 1.5em;
     }
+
+    .dropdownContent {
+        min-width: 180px;
+    }
 }
 
 /* Estilos móvil - Corregido */
@@ -125,17 +176,8 @@
         height: calc(100vh - 70px);
         background: #1a1a1af3;
     }
-}
 
-/* Añadir en tu CSS global */
-.main-content {
-    margin-top: 90px;
-    position: relative;
-    z-index: 1;
-}
-
-@media (max-width: 799px) {
-    .main-content {
-        margin-top: 70px;
+    .dropdownContent {
+        min-width: 150px;
     }
 }

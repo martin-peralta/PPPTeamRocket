@@ -60,7 +60,7 @@ const MyCollections = () => {
 
   const handleDelete = async (collectionId) => {
     if (!auth?.user?._id) return;
-    if (!window.confirm('¿Estás seguro que deseas eliminar esta colección?')) return;
+    if (!window.confirm('Are tou sure that you wanna delete this collection?')) return;
 
     try {
       const res = await fetch(`http://localhost:5000/api/cards/collections/${auth.user._id}/${collectionId}`, {
@@ -72,16 +72,16 @@ const MyCollections = () => {
         toast.success('Collection deleted.');
         fetchCollections();
       } else {
-        toast.error(data.message || 'Error al eliminar.');
+        toast.error(data.message || 'Error deleting collection');
       }
     } catch (err) {
       console.error(err);
-      toast.error('Error eliminando la colección.');
+      toast.error('Error deleting collection');
     }
   };
 
-  const handleEdit = (collectionId) => {
-    navigate(`/collections/detail/${collectionId}`);
+  const handleEdit = (collectionName) => {
+    navigate(`/collections/detail/${collectionName}`);
   };
 
   if (loading) return <Loading />;

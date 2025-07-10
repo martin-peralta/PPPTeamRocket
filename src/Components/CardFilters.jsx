@@ -1,47 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from './CardFilters.module.css';
 
-function CardFilters({
-  selectedRarity,
-  setSelectedRarity,
-  selectedType,
-  setSelectedType,
-  maxHP,
-  setMaxHP,
-  onApplyFilters,
-  onClearFilters
-}) {
+// Ahora el componente recibe directamente los filtros y las funciones para cambiarlos.
+function CardFilters({ filters, setFilters }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [rarities, setRarities] = useState([]);
+  const [types, setTypes] = useState([]);
 
-
-  const [localRarity, setLocalRarity] = useState(selectedRarity);
-  const [localType, setLocalType] = useState(selectedType);
-  const [localHP, setLocalHP] = useState(maxHP);
+  // useEffect para cargar las opciones de filtros cuando el componente se monta
+  useEffect(() => {
+    // Usamos las nuevas rutas del backend
+    axios.get('/api/pokemon/rarities').then(res => setRarities(res.data));
+    axios.get('/api/pokemon/types').then(res => setTypes(res.data));
+  }, []);
 
   const toggleFilters = () => setIsOpen(prev => !prev);
 
-  const handleApply = () => {
-    setSelectedRarity(localRarity);
-    setSelectedType(localType);
-    setMaxHP(localHP);
-    setIsOpen(false);
-    if (onApplyFilters) onApplyFilters();
+  // Función que actualiza el estado de los filtros en el componente padre
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters(prevFilters => ({
+      ...prevFilters,
+      [name]: value
+    }));
   };
 
-  const handleClear = () => {
-    setLocalRarity('');
-    setLocalType('');
-    setLocalHP('');
-    setSelectedRarity('');
-    setSelectedType('');
-    setMaxHP('');
-    if (onClearFilters) onClearFilters();
+  const handleClearFilters = () => {
+    setFilters({
+      rarity: '',
+      type: '',
+      maxHP: ''
+    });
   };
 
   return (
     <div className={styles.dropdownContainer}>
       <button onClick={toggleFilters} className={styles.filterButton}>
-        {isOpen ? 'Close Filters ▲' : 'Filter ▼'}
+        {isOpen ? 'Close Filters ▲' : 'Filters ▼'}
       </button>
 
       {isOpen && (
@@ -49,58 +45,47 @@ function CardFilters({
           <label>
             Rarity:
             <select
-              onChange={(e) => setLocalRarity(e.target.value)}
-              value={localRarity}
+              name="rarity" // El 'name' es importante para handleFilterChange
+              onChange={handleFilterChange}
+              value={filters.rarity}
               className={styles.select}
             >
               <option value="">All</option>
-              <option value="Common">Common</option>
-              <option value="Uncommon">Uncommon</option>
-              <option value="Rare">Rare</option>
-              <option value="Rare Holo">Rare Holo</option>
-              <option value="Promo">Promo</option>
+              {/* Mapeamos las rarezas obtenidas de la API */}
+              {rarities.map(r => <option key={r} value={r}>{r}</option>)}
             </select>
           </label>
 
           <label>
             Type:
             <select
-              onChange={(e) => setLocalType(e.target.value)}
-              value={localType}
+              name="type"
+              onChange={handleFilterChange}
+              value={filters.type}
               className={styles.select}
             >
               <option value="">All</option>
-              <option value="Fire">Fire</option>
-              <option value="Water">Water</option>
-              <option value="Electric">Electric</option>
-              <option value="Grass">Grass</option>
-              <option value="Psychic">Psychic</option>
-              <option value="Fighting">Fighting</option>
-              <option value="Darkness">Darkness</option>
-              <option value="Metal">Metal</option>
-              <option value="Dragon">Dragon</option>
-              <option value="Fairy">Fairy</option>
-              <option value="Colorless">Colorless</option>
+              {/* Mapeamos los tipos obtenidos de la API */}
+              {types.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </label>
 
           <label>
             Max HP:
             <input
+              name="maxHP"
               type="number"
               min="0"
-              value={localHP}
-              onChange={(e) => setLocalHP(e.target.value)}
+              value={filters.maxHP}
+              onChange={handleFilterChange}
               className={styles.input}
               placeholder="e.g. 100"
             />
           </label>
-
+          
           <div className={styles.buttonGroup}>
-            <button onClick={handleApply} className={styles.applyButton}>
-              Apply Filters
-            </button>
-            <button onClick={handleClear} className={styles.clearButton}>
+             {/* Ya no necesitamos el botón "Apply", solo el de limpiar */}
+            <button onClick={handleClearFilters} className={styles.clearButton}>
               Clear Filters
             </button>
           </div>

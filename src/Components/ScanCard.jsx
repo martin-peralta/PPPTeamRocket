@@ -1,4 +1,3 @@
-// frontend/src/Components/ScanCard.jsx
 
 import React, { useState, useRef } from 'react';
 import axios from 'axios';

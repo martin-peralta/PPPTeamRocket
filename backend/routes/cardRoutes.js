@@ -9,7 +9,7 @@ const router = express.Router();
 
 const upload = multer({ dest: 'uploads/' });
 
-// --- NUEVA RUTA PARA EL BUSCADOR DEL FRONTEND ---
+
 router.get('/search', async (req, res) => {
   try {
     // 1. Obtenemos los filtros desde la URL (ej: /search?name=charizard&type=fire)
@@ -48,6 +48,63 @@ router.get('/search', async (req, res) => {
   }
 });
 
+router.get('/stats/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado.' });
+    }
+
+    const inventory = user.inventory;
+
+    if (inventory.length === 0) {
+      return res.status(200).json({
+        totalCards: 0,
+        totalValue: 0,
+        rarityDistribution: {},
+        typeDistribution: {},
+      });
+    }
+
+    // --- Cálculo de Estadísticas ---
+
+    // 1. Valor total de la colección
+    const totalValue = inventory.reduce((sum, card) => sum + (card.price || 0), 0);
+
+    // 2. Distribución por rareza
+    const rarityDistribution = inventory.reduce((acc, card) => {
+      const rarity = card.rarity || 'Unknown';
+      acc[rarity] = (acc[rarity] || 0) + 1;
+      return acc;
+    }, {});
+
+    // 3. Distribución por tipo
+    const typeDistribution = inventory.reduce((acc, card) => {
+      // Una carta puede tener múltiples tipos
+      card.types?.forEach(type => {
+        acc[type] = (acc[type] || 0) + 1;
+      });
+      return acc;
+    }, {});
+
+    // Ensamblar el objeto de respuesta
+    const stats = {
+      totalCards: inventory.length,
+      totalValue: totalValue.toFixed(2), // Formatear a 2 decimales
+      rarityDistribution,
+      typeDistribution,
+      // La "completitud" es más compleja, la dejamos como un posible paso futuro
+    };
+
+    res.status(200).json(stats);
+
+  } catch (error) {
+    console.error('Error generando estadísticas:', error);
+    res.status(500).json({ message: 'Error al generar estadísticas.' });
+  }
+});
 
 // --- RUTA DE ESCANEO ---
 router.post('/scan', upload.single('cardImage'), scanCard);

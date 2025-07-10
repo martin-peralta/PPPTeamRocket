@@ -1,4 +1,3 @@
-// frontend/src/Components/CardSearch.jsx
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -8,7 +7,7 @@ import styles from './CardSearch.module.css';
 const CardSearch = ({ onAddCard }) => {
   const [searchTerm, setSearchTerm] = useState('');
   
-  // 1. Se crea un único estado para todos los filtros
+  
   const [filters, setFilters] = useState({
     rarity: '',
     type: '',
@@ -18,7 +17,7 @@ const CardSearch = ({ onAddCard }) => {
   const [results, setResults] = useState([]);
   const [feedback, setFeedback] = useState('Enter a card name to start searching.');
 
-  // 2. useEffect se ejecuta cuando cambia el término de búsqueda O los filtros
+  
   useEffect(() => {
     // No busca si no hay término de búsqueda
     if (!searchTerm.trim()) {
@@ -29,7 +28,7 @@ const CardSearch = ({ onAddCard }) => {
 
     setFeedback('Searching...');
 
-    // Espera 500ms después de que el usuario deja de escribir para hacer la búsqueda
+   
     const delayDebounceFn = setTimeout(() => {
       const params = {
         name: searchTerm,
@@ -45,7 +44,7 @@ const CardSearch = ({ onAddCard }) => {
         }
       });
       
-      // Llama a la ruta unificada que creamos en cardRoutes.js
+      
       axios.get('/api/cards/search', { params })
         .then(response => {
           setResults(response.data);
@@ -78,7 +77,7 @@ const CardSearch = ({ onAddCard }) => {
         />
       </div>
 
-      {/* 3. Se pasa 'filters' y 'setFilters' como props al componente de filtros */}
+     
       <CardFilters filters={filters} setFilters={setFilters} />
 
       {feedback && <p className={styles.feedback}>{feedback}</p>}

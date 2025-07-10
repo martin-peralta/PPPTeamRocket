@@ -15,7 +15,7 @@ const cardApiClient = axios.create({
 });
 
 // Le cambiamos el nombre para que sea más genérico y aceptamos un límite
-export async function searchCards(query, limit = 25) {
+export async function searchCards(query, limit = 50) {
   try {
     const response = await cardApiClient.get('/', {
       params: {
@@ -56,12 +56,12 @@ export async function searchCardsByType(type) {
   }
 }
 
-// --- NUEVAS FUNCIONES PARA LOS FILTROS ---
 
-// Obtener todas las rarezas disponibles
+
+
 export async function getRarities() {
   try {
-    // Hacemos la llamada directamente al endpoint de 'rarities'
+    // Rarezas
     const response = await axios.get(`${BASE_URL}/rarities`, {
       headers: { 'X-Api-Key': API_KEY }
     });
@@ -72,7 +72,7 @@ export async function getRarities() {
   }
 }
 
-// Obtener todos los tipos disponibles
+// Tipos disponibles
 export async function getTypes() {
   try {
     // Hacemos la llamada directamente al endpoint de 'types'

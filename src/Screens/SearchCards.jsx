@@ -8,7 +8,7 @@ import CardFilters from '../Components/CardFilters';
 function SearchCards() {
   const [searchTerm, setSearchTerm] = useState('');
   
-  // 1. Unificamos todos los filtros en un solo objeto de estado.
+
   const [filters, setFilters] = useState({
     rarity: '',
     type: '',
@@ -19,11 +19,11 @@ function SearchCards() {
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState('Enter a card name to start searching.');
 
-  // 2. Usamos useEffect para que la búsqueda se ejecute automáticamente al cambiar los filtros o el texto.
+
   useEffect(() => {
-    // No busca si no hay nada escrito en la barra principal
+
     if (!searchTerm.trim()) {
-      setCards([]); // Limpia resultados si no hay búsqueda
+      setCards([]); 
       return;
     }
 
@@ -31,7 +31,7 @@ function SearchCards() {
     setFeedback('');
 
     const delayDebounceFn = setTimeout(() => {
-      // 3. Construye los parámetros de búsqueda dinámicamente
+
       const params = new URLSearchParams({
         name: searchTerm,
         rarity: filters.rarity,
@@ -39,14 +39,14 @@ function SearchCards() {
         maxHP: filters.maxHP,
       });
 
-      // Limpia parámetros vacíos para no enviarlos a la API
+ 
       for (let [key, value] of [...params.entries()]) {
         if (!value) {
             params.delete(key);
         }
       }
 
-      // 4. Llama a la ruta correcta que sabe cómo manejar estos filtros
+
       axios.get(`/api/cards/search?${params.toString()}`)
         .then(response => {
           setCards(response.data);
@@ -62,16 +62,16 @@ function SearchCards() {
         .finally(() => {
           setLoading(false);
         });
-    }, 500); // Pequeña espera para no hacer peticiones en cada tecla
+    }, 500); 
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm, filters]); // El efecto se dispara si 'searchTerm' o 'filters' cambian
+  }, [searchTerm, filters]); 
 
   return (
     <div className={styles.searchContainer}>
       <h2 className={styles.title}>Search for a Pokémon Card</h2>
 
-      {/* El input ahora solo actualiza el 'searchTerm' */}
+      
       <div className={styles.form}>
         <input
           type="text"
@@ -82,7 +82,7 @@ function SearchCards() {
         />
       </div>
 
-      {/* 5. Pasamos 'filters' y 'setFilters' al componente hijo. ¡Esto corrige el error! */}
+      
       <CardFilters filters={filters} setFilters={setFilters} />
 
       {loading && <Loading />}

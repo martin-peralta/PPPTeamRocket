@@ -64,3 +64,66 @@
         font-size: 1.2rem;
     }
 }
+/* Añade esto a tu archivo Account.module.css */
+
+.statsSection, .collectionsSection {
+  margin-top: 3rem;
+  padding: 2rem;
+  background-color: #1c1c1c; /* Un poco más claro para destacar */
+  border-radius: 8px;
+}
+
+.sectionTitle {
+  margin-top: 0;
+  border-bottom: 2px solid #e53935;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.summaryGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.statBox {
+    background-color: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.statBox h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #e53935;
+}
+
+.statBox p {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0.5rem 0 0 0;
+}
+
+.chartsGrid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.chartBox {
+    padding: 1rem;
+}
+
+.collectionItem {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .chartsGrid {
+        grid-template-columns: 1fr;
+    }
+}

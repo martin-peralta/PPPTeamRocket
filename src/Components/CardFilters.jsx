@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './CardFilters.module.css';
 
-// Ahora el componente recibe directamente los filtros y las funciones para cambiarlos.
+
 function CardFilters({ filters, setFilters }) {
   const [isOpen, setIsOpen] = useState(false);
   const [rarities, setRarities] = useState([]);
   const [types, setTypes] = useState([]);
 
-  // useEffect para cargar las opciones de filtros cuando el componente se monta
+  
   useEffect(() => {
-    // Usamos las nuevas rutas del backend
+    
     axios.get('/api/pokemon/rarities').then(res => setRarities(res.data));
     axios.get('/api/pokemon/types').then(res => setTypes(res.data));
   }, []);
@@ -45,13 +45,13 @@ function CardFilters({ filters, setFilters }) {
           <label>
             Rarity:
             <select
-              name="rarity" // El 'name' es importante para handleFilterChange
+              name="rarity" 
               onChange={handleFilterChange}
               value={filters.rarity}
               className={styles.select}
             >
               <option value="">All</option>
-              {/* Mapeamos las rarezas obtenidas de la API */}
+              
               {rarities.map(r => <option key={r} value={r}>{r}</option>)}
             </select>
           </label>
@@ -65,7 +65,7 @@ function CardFilters({ filters, setFilters }) {
               className={styles.select}
             >
               <option value="">All</option>
-              {/* Mapeamos los tipos obtenidos de la API */}
+
               {types.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </label>
@@ -84,7 +84,7 @@ function CardFilters({ filters, setFilters }) {
           </label>
           
           <div className={styles.buttonGroup}>
-             {/* Ya no necesitamos el botón "Apply", solo el de limpiar */}
+
             <button onClick={handleClearFilters} className={styles.clearButton}>
               Clear Filters
             </button>

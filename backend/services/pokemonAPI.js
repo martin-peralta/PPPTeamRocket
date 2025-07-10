@@ -1,4 +1,5 @@
 // backend/services/pokemonAPI.js
+
 import axios from 'axios';
 
 const API_KEY = process.env.POKEMON_API_KEY;
@@ -12,26 +13,27 @@ const apiClient = axios.create({
   },
 });
 
-// Buscar cartas por nombre
-export async function searchCardsByName(name) {
+// Le cambiamos el nombre para que sea más genérico y aceptamos un límite
+export async function searchCards(query, limit = 25) {
   try {
     const response = await apiClient.get('/', {
       params: {
-        q: `name:*${name}*`,
+        q: query,
+        pageSize: limit, // <-- Se añade pageSize para limitar los resultados
       },
     });
     return response.data.data;
   } catch (error) {
-    console.error('Error buscando cartas por nombre:', error.message);
+    console.error('Error buscando cartas:', error.message);
     throw error;
   }
 }
 
-// Buscar carta específica por ID (devuelve objeto completo con imágenes, set, etc.)
+// Buscar carta específica por ID
 export async function getCardById(id) {
   try {
     const response = await apiClient.get(`/${id}`);
-    return response.data.data; // 🔁 devolvemos TODO el objeto original
+    return response.data.data;
   } catch (error) {
     console.error('Error buscando carta por ID:', error.message);
     throw error;

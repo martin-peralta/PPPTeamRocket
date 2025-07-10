@@ -17,7 +17,7 @@ const CardSearch = ({ onAddCard }) => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/pokemon/search?name=${searchTerm}`);
+      const response = await fetch(`/api/cards/search?name=${searchTerm}`);
       const data = await response.json();
       setResults(data);
     } catch (err) {

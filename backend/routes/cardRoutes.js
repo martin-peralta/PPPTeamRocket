@@ -1,10 +1,61 @@
 import express from 'express';
+import multer from 'multer';
 import User from '../models/UserModel.js';
-import { getCardById } from '../services/pokemonAPI.js';
+// Se importa la función de búsqueda genérica
+import { getCardById, searchCards } from '../services/pokemonAPI.js';
+import { scanCard } from '../controllers/scanController.js';
 
 const router = express.Router();
 
-// Agregar carta al inventario con precio incluido
+const upload = multer({ dest: 'uploads/' });
+
+// --- NUEVA RUTA PARA EL BUSCADOR DEL FRONTEND ---
+router.get('/search', async (req, res) => {
+  try {
+    // 1. Obtenemos los filtros desde la URL (ej: /search?name=charizard&type=fire)
+    const { name, rarity, type, maxHP } = req.query;
+
+    // 2. Construimos la query para la API de Pokémon TCG
+    let queryParts = [];
+    if (name) {
+      // Usamos asteriscos para una búsqueda flexible
+      queryParts.push(`name:*${name}*`);
+    }
+    if (rarity && rarity !== 'All') {
+      // La API requiere que los valores con espacios estén entre comillas
+      queryParts.push(`rarity:"${rarity}"`);
+    }
+    if (type && type !== 'All') {
+      queryParts.push(`types:${type}`);
+    }
+    if (maxHP) {
+      queryParts.push(`hp:<=${maxHP}`);
+    }
+
+    if (queryParts.length === 0) {
+      return res.status(400).json({ message: 'Se requiere al menos un parámetro de búsqueda.' });
+    }
+
+    const finalQuery = queryParts.join(' ');
+
+    // 3. Llamamos a nuestro servicio de API con la query construida
+    const cards = await searchCards(finalQuery);
+    res.status(200).json(cards);
+
+  } catch (error) {
+    console.error('Error en la búsqueda de cartas:', error);
+    res.status(500).json({ message: 'Error al buscar cartas.' });
+  }
+});
+
+
+// --- RUTA DE ESCANEO ---
+router.post('/scan', upload.single('cardImage'), scanCard);
+
+
+// --- RUTAS DE INVENTARIO Y COLECCIONES ---
+
+// Agregar carta al inventario
 router.post('/add', async (req, res) => {
   const { userId, card } = req.body;
 
@@ -33,7 +84,7 @@ router.post('/add', async (req, res) => {
         rarity: apiCard.rarity,
         setName: apiCard.set?.name || 'Unknown',
         price: price,
-        isTradable: false // 👈 NUEVO CAMPO
+        isTradable: false
       };
 
       user.inventory.push(cardToSave);
@@ -47,7 +98,7 @@ router.post('/add', async (req, res) => {
   }
 });
 
-// NUEVA RUTA: Alternar estado de tradeo
+// Alternar estado de tradeo
 router.patch('/tradable/:userId/:cardId', async (req, res) => {
   const { userId, cardId } = req.params;
 

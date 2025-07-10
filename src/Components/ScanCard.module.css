@@ -1,0 +1,106 @@
+
+.scanContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 900px; /* Un poco más ancho para la galería */
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    border: 1px solid #333;
+    color: #f1f1f1;
+}
+
+.title {
+    margin-bottom: 25px;
+    font-size: 2em;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.actionsContainer {
+    display: flex;
+    gap: 15px;
+}
+
+.actionButton {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #e53935;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.actionButton:hover {
+    background-color: #c62828;
+}
+
+.feedback {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* --- ESTILOS PARA LA GALERÍA --- */
+.resultsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.resultItem {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #3a3a3a;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  text-align: center;
+  width: 180px; /* Ancho fijo para cada item */
+}
+
+.resultItem:hover {
+  transform: scale(1.05);
+  background-color: #e53935;
+}
+
+.cardImage {
+  width: 150px;
+  display: block;
+  border-radius: 8px;
+  margin: 0 auto; /* Centrar la imagen */
+}
+
+.resultItem p {
+  margin: 8px 0 5px 0;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.setInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.setSymbol {
+  width: 20px;
+  height: 20px;
+}

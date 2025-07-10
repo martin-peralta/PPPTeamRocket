@@ -1,0 +1,832 @@
+[
+  {
+    "setId": "base1",
+    "name": "Base",
+    "hash": "f701b78180bfbd81"
+  },
+  {
+    "setId": "base2",
+    "name": "Jungle",
+    "hash": "e3c1f90519e5c3c3"
+  },
+  {
+    "setId": "basep",
+    "name": "Wizards Black Star Promos",
+    "hash": "e7e7e718e781c19d"
+  },
+  {
+    "setId": "base3",
+    "name": "Fossil",
+    "hash": "8f87e784c9c980fd"
+  },
+  {
+    "setId": "base4",
+    "name": "Base Set 2",
+    "hash": "c7078787c3870f1f"
+  },
+  {
+    "setId": "base5",
+    "name": "Team Rocket",
+    "hash": "e3c1dd8183b313b9"
+  },
+  {
+    "setId": "gym1",
+    "name": "Gym Heroes",
+    "hash": "c3b1e1e181ede1e7"
+  },
+  {
+    "setId": "gym2",
+    "name": "Gym Challenge",
+    "hash": "e781e1b8998787c7"
+  },
+  {
+    "setId": "neo1",
+    "name": "Neo Genesis",
+    "hash": "e7e3e790d1c381f9"
+  },
+  {
+    "setId": "neo2",
+    "name": "Neo Discovery",
+    "hash": "c3c3e781999919b9"
+  },
+  {
+    "setId": "si1",
+    "name": "Southern Islands",
+    "hash": "c7c183f1e0cdcdcf"
+  },
+  {
+    "setId": "neo3",
+    "name": "Neo Revelation",
+    "hash": "e72636a5db8181e7"
+  },
+  {
+    "setId": "neo4",
+    "name": "Neo Destiny",
+    "hash": "fce0c1c7831f1f3f"
+  },
+  {
+    "setId": "base6",
+    "name": "Legendary Collection",
+    "hash": "008081e7c3999cc3"
+  },
+  {
+    "setId": "ecard1",
+    "name": "Expedition Base Set",
+    "hash": "c399e54343a799c3"
+  },
+  {
+    "setId": "ecard2",
+    "name": "Aquapolis",
+    "hash": "e7c3c3993c3c81e7"
+  },
+  {
+    "setId": "ecard3",
+    "name": "Skyridge",
+    "hash": "8f838787cf8181dd"
+  },
+  {
+    "setId": "ex1",
+    "name": "Ruby & Sapphire",
+    "hash": "e3838b87a5d181e7"
+  },
+  {
+    "setId": "ex2",
+    "name": "Sandstorm",
+    "hash": "d781e1b1b18b81db"
+  },
+  {
+    "setId": "ex3",
+    "name": "Dragon",
+    "hash": "e7c3c3a5a5c3c3e7"
+  },
+  {
+    "setId": "np",
+    "name": "Nintendo Black Star Promos",
+    "hash": "e7e7e718e781c19d"
+  },
+  {
+    "setId": "ex4",
+    "name": "Team Magma vs Team Aqua",
+    "hash": "fc3993c3c18f9f3f"
+  },
+  {
+    "setId": "ex5",
+    "name": "Hidden Legends",
+    "hash": "db81e78181db81db"
+  },
+  {
+    "setId": "ex6",
+    "name": "FireRed & LeafGreen",
+    "hash": "e78199c3c39981e7"
+  },
+  {
+    "setId": "pop1",
+    "name": "POP Series 1",
+    "hash": "8f85c9a5c5f0a0cf"
+  },
+  {
+    "setId": "ex7",
+    "name": "Team Rocket Returns",
+    "hash": "c1b9a5b8ada181e7"
+  },
+  {
+    "setId": "ex8",
+    "name": "Deoxys",
+    "hash": "fcc0d1c383c79f9f"
+  },
+  {
+    "setId": "ex9",
+    "name": "Emerald",
+    "hash": "e781c31818c381e7"
+  },
+  {
+    "setId": "ex10",
+    "name": "Unseen Forces",
+    "hash": "ff00f131e1c3819f"
+  },
+  {
+    "setId": "pop2",
+    "name": "POP Series 2",
+    "hash": "cf81c9a5d1f0a18f"
+  },
+  {
+    "setId": "ex11",
+    "name": "Delta Species",
+    "hash": "c3c3c3e7e78181e7"
+  },
+  {
+    "setId": "ex12",
+    "name": "Legend Maker",
+    "hash": "e7e7c3c3999981db"
+  },
+  {
+    "setId": "pop3",
+    "name": "POP Series 3",
+    "hash": "8f85c9a5d4f0a18f"
+  },
+  {
+    "setId": "ex13",
+    "name": "Holon Phantoms",
+    "hash": "e7e7e7e7c3a500ff"
+  },
+  {
+    "setId": "ex14",
+    "name": "Crystal Guardians",
+    "hash": "fff9f1e1c3878fff"
+  },
+  {
+    "setId": "pop4",
+    "name": "POP Series 4",
+    "hash": "8f0d8da3f0f02c8f"
+  },
+  {
+    "setId": "ex15",
+    "name": "Dragon Frontiers",
+    "hash": "f381c3c381d7c3c3"
+  },
+  {
+    "setId": "pop5",
+    "name": "POP Series 5",
+    "hash": "cf81c9a3d4f0a18f"
+  },
+  {
+    "setId": "ex16",
+    "name": "Power Keepers",
+    "hash": "e78191b96ca581e7"
+  },
+  {
+    "setId": "dp1",
+    "name": "Diamond & Pearl",
+    "hash": "c3c3a5a5a5c3c3ff"
+  },
+  {
+    "setId": "dpp",
+    "name": "DP Black Star Promos",
+    "hash": "e7e7e718e781c19d"
+  },
+  {
+    "setId": "dp2",
+    "name": "Mysterious Treasures",
+    "hash": "e781993c3c9981e7"
+  },
+  {
+    "setId": "pop6",
+    "name": "POP Series 6",
+    "hash": "8f89c9a3e0f8298f"
+  },
+  {
+    "setId": "dp3",
+    "name": "Secret Wonders",
+    "hash": "eb81a9d18b9581d7"
+  },
+  {
+    "setId": "dp4",
+    "name": "Great Encounters",
+    "hash": "c3c3c3c9b985c3c3"
+  },
+  {
+    "setId": "pop7",
+    "name": "POP Series 7",
+    "hash": "cf88c8a745f1238f"
+  },
+  {
+    "setId": "dp5",
+    "name": "Majestic Dawn",
+    "hash": "e781bd42c39981e7"
+  },
+  {
+    "setId": "dp6",
+    "name": "Legends Awakened",
+    "hash": "c3c3c399999981db"
+  },
+  {
+    "setId": "pop8",
+    "name": "POP Series 8",
+    "hash": "8f89c9a9e2f0298f"
+  },
+  {
+    "setId": "dp7",
+    "name": "Stormfront",
+    "hash": "c399ad524ab599c3"
+  },
+  {
+    "setId": "pl1",
+    "name": "Platinum",
+    "hash": "99bdbd81c3a581ff"
+  },
+  {
+    "setId": "pop9",
+    "name": "POP Series 9",
+    "hash": "8f89c9a3c4f8298f"
+  },
+  {
+    "setId": "pl2",
+    "name": "Rising Rivals",
+    "hash": "cf8181e7e78181db"
+  },
+  {
+    "setId": "pl3",
+    "name": "Supreme Victors",
+    "hash": "c3c3c3c3c3e7e7ff"
+  },
+  {
+    "setId": "pl4",
+    "name": "Arceus",
+    "hash": "ff99a5a5a5a599ff"
+  },
+  {
+    "setId": "ru1",
+    "name": "Pokémon Rumble",
+    "hash": "e78185d99b85c3c3"
+  },
+  {
+    "setId": "hgss1",
+    "name": "HeartGold & SoulSilver",
+    "hash": "d781a5a5899dc0f3"
+  },
+  {
+    "setId": "hsp",
+    "name": "HGSS Black Star Promos",
+    "hash": "e7e7e718e781c19d"
+  },
+  {
+    "setId": "hgss2",
+    "name": "HS—Unleashed",
+    "hash": "e7e7e781c3c3c3c3"
+  },
+  {
+    "setId": "hgss3",
+    "name": "HS—Undaunted",
+    "hash": "9f90b52c2d8d85c7"
+  },
+  {
+    "setId": "hgss4",
+    "name": "HS—Triumphant",
+    "hash": "e781993c81bd81e7"
+  },
+  {
+    "setId": "col1",
+    "name": "Call of Legends",
+    "hash": "e1e1e5c183a79f9f"
+  },
+  {
+    "setId": "bwp",
+    "name": "BW Black Star Promos",
+    "hash": "e7e7e718e781c19d"
+  },
+  {
+    "setId": "bw1",
+    "name": "Black & White",
+    "hash": "f170f0f00f0f0e8f"
+  },
+  {
+    "setId": "mcd11",
+    "name": "McDonald's Collection 2011",
+    "hash": "e7818787878781e7"
+  },
+  {
+    "setId": "bw2",
+    "name": "Emerging Powers",
+    "hash": "e7c3c3c391d3c3e7"
+  },
+  {
+    "setId": "bw3",
+    "name": "Noble Victories",
+    "hash": "ff9dc5e1e1f1f1f7"
+  },
+  {
+    "setId": "bw4",
+    "name": "Next Destinies",
+    "hash": "ffc3c39999c3c3ff"
+  },
+  {
+    "setId": "bw5",
+    "name": "Dark Explorers",
+    "hash": "ff99999999c381e7"
+  },
+  {
+    "setId": "mcd12",
+    "name": "McDonald's Collection 2012",
+    "hash": "817e5b58e52501ff"
+  },
+  {
+    "setId": "bw6",
+    "name": "Dragons Exalted",
+    "hash": "c7839955a89bc1e3"
+  },
+  {
+    "setId": "dv1",
+    "name": "Dragon Vault",
+    "hash": "f1c181f39d9181cf"
+  },
+  {
+    "setId": "bw7",
+    "name": "Boundaries Crossed",
+    "hash": "cf878793938787cf"
+  },
+  {
+    "setId": "bw8",
+    "name": "Plasma Storm",
+    "hash": "99c3a5c381bd81e7"
+  },
+  {
+    "setId": "bw9",
+    "name": "Plasma Freeze",
+    "hash": "e7c1f1c1e1c381e7"
+  },
+  {
+    "setId": "bw10",
+    "name": "Plasma Blast",
+    "hash": "e781a599a5a581e7"
+  },
+  {
+    "setId": "xyp",
+    "name": "XY Black Star Promos",
+    "hash": "e7e7e718e781c19d"
+  },
+  {
+    "setId": "bw11",
+    "name": "Legendary Treasures",
+    "hash": "f3c0c783333303cf"
+  },
+  {
+    "setId": "xy0",
+    "name": "Kalos Starter Set",
+    "hash": "f1918dc983e3819f"
+  },
+  {
+    "setId": "xy1",
+    "name": "XY",
+    "hash": "ff00a599c3c3c3e7"
+  },
+  {
+    "setId": "xy2",
+    "name": "Flashfire",
+    "hash": "cf8f8fc185e383df"
+  },
+  {
+    "setId": "xy3",
+    "name": "Furious Fists",
+    "hash": "c3c385b999c3c3c3"
+  },
+  {
+    "setId": "xy4",
+    "name": "Phantom Forces",
+    "hash": "e781c3c3c3a581e7"
+  },
+  {
+    "setId": "xy5",
+    "name": "Primal Clash",
+    "hash": "e7e7c3c381db81db"
+  },
+  {
+    "setId": "dc1",
+    "name": "Double Crisis",
+    "hash": "e7c3c399999981e7"
+  },
+  {
+    "setId": "xy6",
+    "name": "Roaring Skies",
+    "hash": "ff9999c381e7e7ff"
+  },
+  {
+    "setId": "xy7",
+    "name": "Ancient Origins",
+    "hash": "e781c39a59c381e7"
+  },
+  {
+    "setId": "xy8",
+    "name": "BREAKthrough",
+    "hash": "db81a58181a581db"
+  },
+  {
+    "setId": "xy9",
+    "name": "BREAKpoint",
+    "hash": "e781999981bd99c3"
+  },
+  {
+    "setId": "g1",
+    "name": "Generations",
+    "hash": "e781ff81e781e7e7"
+  },
+  {
+    "setId": "xy10",
+    "name": "Fates Collide",
+    "hash": "e7e781dbc3c3e7e7"
+  },
+  {
+    "setId": "xy11",
+    "name": "Steam Siege",
+    "hash": "e78199a5a59981e7"
+  },
+  {
+    "setId": "mcd16",
+    "name": "McDonald's Collection 2016",
+    "hash": "8f07b934a5a524bd"
+  },
+  {
+    "setId": "xy12",
+    "name": "Evolutions",
+    "hash": "ff0099c3c39900ff"
+  },
+  {
+    "setId": "sm1",
+    "name": "Sun & Moon",
+    "hash": "e787c1d9d9c187e7"
+  },
+  {
+    "setId": "smp",
+    "name": "SM Black Star Promos",
+    "hash": "e7e7e718e781c19d"
+  },
+  {
+    "setId": "sm2",
+    "name": "Guardians Rising",
+    "hash": "e783c3c3c3c383e7"
+  },
+  {
+    "setId": "sm3",
+    "name": "Burning Shadows",
+    "hash": "ff81db8181d787df"
+  },
+  {
+    "setId": "sm35",
+    "name": "Shining Legends",
+    "hash": "bd189999a5c3c3e7"
+  },
+  {
+    "setId": "sm4",
+    "name": "Crimson Invasion",
+    "hash": "ffe0c993b1c381db"
+  },
+  {
+    "setId": "sm5",
+    "name": "Ultra Prism",
+    "hash": "ffe7c3c3999900ff"
+  },
+  {
+    "setId": "sm6",
+    "name": "Forbidden Light",
+    "hash": "e7c3c3c3c1b581db"
+  },
+  {
+    "setId": "sm7",
+    "name": "Celestial Storm",
+    "hash": "e7819999bd8181e7"
+  },
+  {
+    "setId": "sm75",
+    "name": "Dragon Majesty",
+    "hash": "fb8191e9e9c181e7"
+  },
+  {
+    "setId": "sm8",
+    "name": "Lost Thunder",
+    "hash": "f783c78391d3c3c7"
+  },
+  {
+    "setId": "sm9",
+    "name": "Team Up",
+    "hash": "f9c0c19bd983039f"
+  },
+  {
+    "setId": "det1",
+    "name": "Detective Pikachu",
+    "hash": "ff8793b383e3f9ff"
+  },
+  {
+    "setId": "sm10",
+    "name": "Unbroken Bonds",
+    "hash": "ffe7c3c385cbc3e7"
+  },
+  {
+    "setId": "sm11",
+    "name": "Unified Minds",
+    "hash": "f7c0d383c1e903e7"
+  },
+  {
+    "setId": "sm115",
+    "name": "Hidden Fates",
+    "hash": "9f83c38ba3c981ed"
+  },
+  {
+    "setId": "sma",
+    "name": "Hidden Fates Shiny Vault",
+    "hash": "e7819999bd8181e7"
+  },
+  {
+    "setId": "mcd19",
+    "name": "McDonald's Collection 2019",
+    "hash": "d989a53624bd99c3"
+  },
+  {
+    "setId": "sm12",
+    "name": "Cosmic Eclipse",
+    "hash": "e781a1a781db81e7"
+  },
+  {
+    "setId": "swshp",
+    "name": "SWSH Black Star Promos",
+    "hash": "e7e7e718e781c19d"
+  },
+  {
+    "setId": "swsh1",
+    "name": "Sword & Shield",
+    "hash": "ffffbd8181e7e7ff"
+  },
+  {
+    "setId": "swsh2",
+    "name": "Rebel Clash",
+    "hash": "f7e0c19bc9c3879f"
+  },
+  {
+    "setId": "swsh3",
+    "name": "Darkness Ablaze",
+    "hash": "e724a5a581dbe7e7"
+  },
+  {
+    "setId": "swsh35",
+    "name": "Champion's Path",
+    "hash": "e781839bd9c181e7"
+  },
+  {
+    "setId": "swsh4",
+    "name": "Vivid Voltage",
+    "hash": "ff1889cbc3c3e7ff"
+  },
+  {
+    "setId": "swsh45",
+    "name": "Shining Fates",
+    "hash": "e7c3c39999c3c3e7"
+  },
+  {
+    "setId": "swsh45sv",
+    "name": "Shining Fates Shiny Vault",
+    "hash": "e7c3c39999c3c3e7"
+  },
+  {
+    "setId": "swsh5",
+    "name": "Battle Styles",
+    "hash": "e724a5a581db81e7"
+  },
+  {
+    "setId": "swsh6",
+    "name": "Chilling Reign",
+    "hash": "ffe7e781a5c381ff"
+  },
+  {
+    "setId": "swsh7",
+    "name": "Evolving Skies",
+    "hash": "e7c3c3c3c3c3e7e7"
+  },
+  {
+    "setId": "cel25",
+    "name": "Celebrations",
+    "hash": "bd81c3c3c3c300ff"
+  },
+  {
+    "setId": "cel25c",
+    "name": "Celebrations: Classic Collection",
+    "hash": "bd81c3c3c3c300ff"
+  },
+  {
+    "setId": "mcd14",
+    "name": "McDonald's Collection 2014",
+    "hash": "db18999942e7e7e7"
+  },
+  {
+    "setId": "mcd15",
+    "name": "McDonald's Collection 2015",
+    "hash": "ff00a59981db00ff"
+  },
+  {
+    "setId": "mcd18",
+    "name": "McDonald's Collection 2018",
+    "hash": "c3c3c3c399c3c3c3"
+  },
+  {
+    "setId": "mcd17",
+    "name": "McDonald's Collection 2017",
+    "hash": "ff81c3a5a5a581eb"
+  },
+  {
+    "setId": "mcd21",
+    "name": "McDonald's Collection 2021",
+    "hash": "ff007e2481db247e"
+  },
+  {
+    "setId": "bp",
+    "name": "Best of Game",
+    "hash": "fcf0b18beb0383ab"
+  },
+  {
+    "setId": "swsh8",
+    "name": "Fusion Strike",
+    "hash": "e3839f03a3c5c1e3"
+  },
+  {
+    "setId": "fut20",
+    "name": "Pokémon Futsal Collection",
+    "hash": "e781e59199c980fd"
+  },
+  {
+    "setId": "tk1a",
+    "name": "EX Trainer Kit Latias",
+    "hash": "7938bcc4e0c783e9"
+  },
+  {
+    "setId": "tk1b",
+    "name": "EX Trainer Kit Latios",
+    "hash": "cfcfeec0e38303e7"
+  },
+  {
+    "setId": "tk2a",
+    "name": "EX Trainer Kit 2 Plusle",
+    "hash": "dc3133878787c3c3"
+  },
+  {
+    "setId": "tk2b",
+    "name": "EX Trainer Kit 2 Minun",
+    "hash": "3f1838b3870f071f"
+  },
+  {
+    "setId": "swsh9",
+    "name": "Brilliant Stars",
+    "hash": "e78181dbdb8181e7"
+  },
+  {
+    "setId": "swsh9tg",
+    "name": "Brilliant Stars Trainer Gallery",
+    "hash": "e78181dbdb8181e7"
+  },
+  {
+    "setId": "swsh10",
+    "name": "Astral Radiance",
+    "hash": "e781a1e381db81e7"
+  },
+  {
+    "setId": "swsh10tg",
+    "name": "Astral Radiance Trainer Gallery",
+    "hash": "e781a1e381db81e7"
+  },
+  {
+    "setId": "pgo",
+    "name": "Pokémon GO",
+    "hash": "8f078793c1e9e0f1"
+  },
+  {
+    "setId": "swsh11",
+    "name": "Lost Origin",
+    "hash": "99999999c39918db"
+  },
+  {
+    "setId": "swsh11tg",
+    "name": "Lost Origin Trainer Gallery",
+    "hash": "99999999c39918db"
+  },
+  {
+    "setId": "swsh12",
+    "name": "Silver Tempest",
+    "hash": "e78183a73c9981e7"
+  },
+  {
+    "setId": "swsh12tg",
+    "name": "Silver Tempest Trainer Gallery",
+    "hash": "e78183a73c9981e7"
+  },
+  {
+    "setId": "mcd22",
+    "name": "McDonald's Collection 2022",
+    "hash": "ffe7c3c3c3c381ff"
+  },
+  {
+    "setId": "swsh12pt5",
+    "name": "Crown Zenith",
+    "hash": "b983c3c3839d18e7"
+  },
+  {
+    "setId": "swsh12pt5gg",
+    "name": "Crown Zenith Galarian Gallery",
+    "hash": "b983c3c3839d18e7"
+  },
+  {
+    "setId": "sv1",
+    "name": "Scarlet & Violet",
+    "hash": "ff00b13c3ca500ff"
+  },
+  {
+    "setId": "svp",
+    "name": "Scarlet & Violet Black Star Promos",
+    "hash": "e7e7e718e781c19d"
+  },
+  {
+    "setId": "sv2",
+    "name": "Paldea Evolved",
+    "hash": "ff00a1bc3c8d00ff"
+  },
+  {
+    "setId": "sve",
+    "name": "Scarlet & Violet Energies",
+    "hash": "ff00353c3ca500ff"
+  },
+  {
+    "setId": "sv3",
+    "name": "Obsidian Flames",
+    "hash": "ff002d3c3ca900ff"
+  },
+  {
+    "setId": "sv3pt5",
+    "name": "151",
+    "hash": "ff003c3c3c9900ff"
+  },
+  {
+    "setId": "sv4",
+    "name": "Paradox Rift",
+    "hash": "ff00a53c3c8d00ff"
+  },
+  {
+    "setId": "sv4pt5",
+    "name": "Paldean Fates",
+    "hash": "ff00a53c3ca900ff"
+  },
+  {
+    "setId": "sv5",
+    "name": "Temporal Forces",
+    "hash": "ff003c3cb89900ff"
+  },
+  {
+    "setId": "sv6",
+    "name": "Twilight Masquerade",
+    "hash": "ff00247e7e0c00ff"
+  },
+  {
+    "setId": "sv6pt5",
+    "name": "Shrouded Fable",
+    "hash": "ff003c3c3da100ff"
+  },
+  {
+    "setId": "sv7",
+    "name": "Stellar Crown",
+    "hash": "ff002d3c3ca900ff"
+  },
+  {
+    "setId": "sv8",
+    "name": "Surging Sparks",
+    "hash": "ff003c3c38b900ff"
+  },
+  {
+    "setId": "sv8pt5",
+    "name": "Prismatic Evolutions",
+    "hash": "ff003c3c3c8d00ff"
+  },
+  {
+    "setId": "sv9",
+    "name": "Journey Together",
+    "hash": "ff003c3c3c3c00ff"
+  },
+  {
+    "setId": "sv10",
+    "name": "Destined Rivals",
+    "hash": "ff003c3c3c3c00ff"
+  }
+]

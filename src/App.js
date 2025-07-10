@@ -21,6 +21,7 @@ import InventoryView from './Components/InventoryView';
 import CreateCollection from './Components/CreateCollection';
 import MyCollections from './Components/MyCollections';
 import CollectionDetail from './Components/CollectionDetail';
+import ScanPage from './Screens/ScanPage';
 
 
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/loadingscreen" element={<Loading />} />
+        <Route path="/scan" element={<ScanPage />} />
         <Route path="/collections" element={<InventoryView />} />             
         <Route path="/collections/inventory" element={<InventoryView />} />
         <Route path="/collections/mycollections" element={<MyCollections />} />  

@@ -30,10 +30,10 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', detectDimension);
   }, [windowDimension]);
 
+  // Se eliminó "Cards" del array para manejarlo como un dropdown separado
   const links = [
     { id: 1, link: "Home", to: "/", type: "route" },
     { id: 2, link: "Account", to: "/account", type: "route" },
-    { id: 3, link: "Cards", to: "/cards", type: "route" },
     { id: 4, link: "InProgress", to: "inprogress", type: "scroll" }
   ];
 
@@ -65,7 +65,8 @@ const Navbar = () => {
 
       {(navBarOpen || windowDimension.width > 800) && (
         <ul className={styles.linksContainer}>
-          {links.slice(0, 3).map((x) => (
+          {/* Renderiza Home y Account */}
+          {links.slice(0, 2).map((x) => (
             <li key={x.id} style={{ listStyle: "none" }}>
               <RouterLink
                 to={x.to}
@@ -76,8 +77,23 @@ const Navbar = () => {
               </RouterLink>
             </li>
           ))}
+          
+          {/* --- NUEVO DROPDOWN PARA "CARDS" --- */}
+          <li style={{ listStyle: "none" }}>
+            <div className={styles.dropdown}>
+              <button className={styles.navLink}>Cards</button>
+              <div className={styles.dropdownContent}>
+                <RouterLink to="/cards" onClick={() => setNavBarOpen(false)} className={styles.navLink}>
+                  Search Card
+                </RouterLink>
+                <RouterLink to="/scan" onClick={() => setNavBarOpen(false)} className={styles.navLink}>
+                  Scan Card
+                </RouterLink>
+              </div>
+            </div>
+          </li>
 
-          {/* Mover esta sección antes de InProgress */}
+          {/* Dropdown existente para "Collections & Inventory" */}
           <li style={{ listStyle: "none" }}>
             <div className={styles.dropdown}>
               <button className={styles.navLink}>Collections & Inventory</button>
@@ -95,8 +111,8 @@ const Navbar = () => {
             </div>
           </li>
 
-          {/* InProgress va después */}
-          {links.slice(3).map((x) => (
+          {/* Link de InProgress */}
+          {links.slice(2).map((x) => (
             <li key={x.id} style={{ listStyle: "none" }}>
               <button
                 onClick={() => {
